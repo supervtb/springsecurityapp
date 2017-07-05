@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <link type="text/css" href="/css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+<div class="form">
+
+    <ul class="tab-group">
+        <li class="tab active"><a href="#login">Вход</a></li>
+        <li class="tab "><a href="#signup">Регистрация</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="login">
+            <h1>Вход</h1>
+            <form th:action="@{/login}" method="post" >
+                <div class="field-wrap">
+                    <input type="text" placeholder="Email" name="username"/>
+                </div>
+                <div class="field-wrap">
+                    <input type="password" placeholder="Пароль" name="password"/>
+                </div>
+                <p class="forgot"><a href="#">Восстановить пароль</a></p>
+                <div class="field-wrap">
+                    <input class="button button-block" type="submit" value="Войти"/>
+                </div>
+
+            </form>
+
+        </div>
+        <div id="signup">
+            <h1>Регистрация</h1>
+            <form th:action="@{/registration}" method="post">
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <input type="text" placeholder="Имя"/>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" placeholder="Фамилия"/>
+                    </div>
+                </div>
+                <div class="field-wrap">
+                    <input type="email" placeholder="Email"/>
+                </div>
+                <div class="field-wrap">
+                    <input type="password" placeholder="Пароль"/>
+                </div>
+                <div class="field-wrap">
+                    <input class="button button-block" type="submit" value="Зарегистрироваться"/>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div><!-- tab-content -->
+
+</div>
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+</html>
