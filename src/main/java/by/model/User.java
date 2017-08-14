@@ -1,31 +1,41 @@
 package by.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
-/**
- * Created by albertchubakov on 14.08.17.
- */
+
 @Entity
 @Table(name="USER")
 public class User {
 
     @Id
-    @Column(name="id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id")
+    private String userId;
     @Column(name="name")
     private String name;
     @Column(name="password")
     private String password;
     @Column(name="email")
     private String email;
-    @Column(name="role")
-    private String role;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role;
+
+    public User() {
+    }
+
+    public User(User user){
+        this.userId = user.getId();
+        this.name = user.getName();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+        this.role = user.getRole();
+    }
+
 
     public String getId(){
-        return name;
+        return userId;
     }
 
     public String getName(){
@@ -40,13 +50,11 @@ public class User {
         return email;
     }
 
-    public String getRole(){
-        return role;
-    }
+
 
 
     public void setId(String id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public void setName(String name) {
@@ -61,8 +69,14 @@ public class User {
         this.email = email;
     }
 
-    public void setRole(String role) {
-            this.role = role;
+    public Set<Role> getRole() {
+        return role;
     }
+
+    public void setRoles(Set<Role> role) {
+        this.role = role;
+    }
+
+
 }
 

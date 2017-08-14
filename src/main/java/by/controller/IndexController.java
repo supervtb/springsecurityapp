@@ -11,7 +11,7 @@ public class IndexController {
     public String greeting() {
         return "index";
     }
-    @RequestMapping("/login")
+   @RequestMapping("/login")
     public String login() {
         return "login";
     }
@@ -19,6 +19,8 @@ public class IndexController {
     public String hello() {
         return "banking";
     }
+
+
 
 
 
