@@ -1,10 +1,19 @@
 package by;
 
+import org.omg.CORBA.Environment;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Created by albertchubakov on 05.07.17.
@@ -35,3 +44,4 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
     }
 
 }
+
