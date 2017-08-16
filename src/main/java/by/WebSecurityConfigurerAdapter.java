@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.util.Properties;
 
 
@@ -67,38 +68,27 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-
+                .loginPage("/login")
                 .permitAll();
-
-
-    }
-
+  }
 
     @Autowired
     private CustomUserDetailService userDetailsService;
+  private DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 
         authenticationManagerBuilder.userDetailsService(userDetailsService)
-                .passwordEncoder(getPasswordEncoder());
+               .passwordEncoder(getPasswordEncoder());
     }
 
     private PasswordEncoder getPasswordEncoder() {
-
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(CharSequence charSequence, String s) {
-                return true;
-            }
-        };
-
-
+        return new BCryptPasswordEncoder();
     }
+
+
+
+
 }
 
