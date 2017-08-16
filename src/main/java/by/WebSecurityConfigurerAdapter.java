@@ -35,7 +35,7 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "/home", "/css/**", "/js/**").permitAll()
+                .antMatchers("/", "/home","/registration", "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
