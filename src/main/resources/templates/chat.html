@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<h2 th:inline="text"> Role: <span sec:authentication="principal.authorities">   </span> </h2>
+
+<div sec:authorize="hasRole('ROLE_user')">
+    This content is only shown to users.
+</div>
+<div sec:authorize="hasRole('ROLE_admin')">
+    This content is only shown to admin.
+</div>
+
 
 
 

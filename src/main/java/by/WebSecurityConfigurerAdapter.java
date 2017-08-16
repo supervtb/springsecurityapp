@@ -25,51 +25,24 @@ import java.util.Properties;
 
 
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @EnableJpaRepositories()
 @Configuration
 @EnableWebSecurity
-
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfigurerAdapter extends org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter {
-  /* @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/test", "/css/**", "/js/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-               // .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder;
-    }
-*/
-
-
-  @Override
+    @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "/home", "/test", "/css/**", "/js/**").permitAll()
+                .antMatchers("/", "/home", "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll();
+
+
   }
 
     @Autowired

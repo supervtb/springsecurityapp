@@ -1,5 +1,7 @@
 package by.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +19,15 @@ public class IndexController {
     public String login() {
         return "login";
     }
-    @RequestMapping("/banking")
-    public String hello() {
-        return "banking";
+    @RequestMapping("/chat")
+    public String chat() {
+        return "chat";
+    }
+
+
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
     }
 
 
