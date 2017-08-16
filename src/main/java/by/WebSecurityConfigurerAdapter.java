@@ -23,16 +23,14 @@ import java.util.Properties;
 
 
 
-/**
- * Created by albertchubakov on 05.07.17.
- */
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories()
 @Configuration
 @EnableWebSecurity
 
 public class WebSecurityConfigurerAdapter extends org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter {
-  /*  @Override
+  /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -40,7 +38,7 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+               // .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
@@ -61,7 +59,7 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
 */
 
 
-   @Override
+  @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
@@ -69,7 +67,7 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+
                 .permitAll();
 
 
