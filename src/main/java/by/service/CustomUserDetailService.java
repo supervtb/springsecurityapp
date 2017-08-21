@@ -5,12 +5,16 @@ import by.model.Role;
 import by.model.User;
 import by.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -23,23 +27,29 @@ public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-   @Override
+    @Override
     public  UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByName(name);
        optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
        return optionalUser.map(CustomUserDetails::new).get();
    }
 
-
     public void save(User user){
-       user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-       userRepository.save(user);
-
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
 
     }
+
+    public void delete(String user){
+       userRepository.deleteByName(user);
+    }
+
+    public void updatePassword(String password, String name){
+       userRepository.updatePassword(bCryptPasswordEncoder.encode(password), name);
+    }
+
 
 
 

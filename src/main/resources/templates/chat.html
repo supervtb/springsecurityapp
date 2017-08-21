@@ -2,25 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <link type="text/css" href="/css/bootstrap.css" rel="stylesheet" />
+    <link type="text/css" href="/css/main.css" rel="stylesheet" />
     <title>Hello World!</title>
 </head>
 <body>
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand"><span class="usernamemenu" sec:authentication="principal.name"></span></a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Чат <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/account">Аккаунт</a>
+            </li>
+            <li class="nav-item">
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-success my-2 my-sm-0" type="submit" value="Выйти"/>
+                </form>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <div class="main-container">
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 <h2 th:inline="text"> Role: <span sec:authentication="principal.authorities">   </span> </h2>
+<h2 th:inline="text"> Username: <span sec:authentication="principal.name">   </span> </h2>
 
-<div sec:authorize="hasRole('ROLE_user')">
-    This content is only shown to users.
+
+
+
+    </div>
 </div>
-<div sec:authorize="hasRole('ROLE_admin')">
-    This content is only shown to admin.
-</div>
-
-
-
-
-
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 </body>
 </html>
