@@ -5,9 +5,12 @@
     <title>Spring Security Example </title>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <link type="text/css" href="/css/style.css" rel="stylesheet" />
+    <link type="text/css" href="/css/main.css" rel="stylesheet" />
 
 </head>
 <body>
+
+
 
 
 <div class="form">
@@ -24,12 +27,19 @@
             <h1>Вход</h1>
             <form th:action="@{/login}" method="post" >
                 <div class="field-wrap">
-                    <input type="text" placeholder="Имя" name="username"/>
+                    <input type="text" placeholder="Логин" name="username"/>
                 </div>
                 <div class="field-wrap">
                     <input type="password" placeholder="Пароль" name="password"/>
                 </div>
-
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        <div class="texterrorlogin"> Неправильный логин или пароль</div>
+                    </div>
+                </div>
+                <div class="field-wrap">
+                    <div class="texterrorlogin" th:text="${errorreg}"> re </div>
+                </div>
                 <p class="forgot"><a href="#">Восстановить пароль</a></p>
                 <div class="field-wrap">
                     <input class="button button-block" type="submit" value="Войти"/>
@@ -43,7 +53,7 @@
             <form th:action="@{/registration}" method="post">
 
                     <div class="field-wrap">
-                        <input type="text" placeholder="Имя" name="name"/>
+                        <input type="text" placeholder="Логин" name="name"/>
                     </div>
 
                 <div class="field-wrap">

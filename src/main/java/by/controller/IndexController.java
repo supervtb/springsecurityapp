@@ -4,14 +4,19 @@ import by.model.User;
 import by.repository.UserRepository;
 import by.service.CustomUserDetailService;
 import jdk.nashorn.internal.ir.RuntimeNode;
+import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.logging.Logger;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -53,6 +58,14 @@ public class IndexController {
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         customUserDetailService.save(userForm);
         return"redirect:/chat";
+    }
+
+    @ExceptionHandler(JDBCException.class)
+    public ModelAndView handleJDBCException(Exception ex, Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        modelAndView.addObject("errorreg", "Имя должно быть уникальным");
+        return modelAndView;
 
     }
 
@@ -67,8 +80,11 @@ public class IndexController {
     public String changePassword(@ModelAttribute("updatepassword") String updatepassword, Principal principal){
         String user = principal.getName();
         customUserDetailService.updatePassword(updatepassword , user );
-        return "redirect:/chat";
+        return "redirect:/index";
     }
+
+
+
 
 
 
