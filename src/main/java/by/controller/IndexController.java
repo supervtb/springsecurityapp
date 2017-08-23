@@ -1,5 +1,6 @@
 package by.controller;
 
+import by.emailsender.Sender;
 import by.model.User;
 import by.repository.UserRepository;
 import by.service.CustomUserDetailService;
@@ -57,6 +58,8 @@ public class IndexController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         customUserDetailService.save(userForm);
+        Sender sender  = new Sender("qwdxasc@gmail.com","12345678q");
+        sender.send("Регистрация в чате", "Вы успешно зарегистрированы, username: "+userForm.getName(), "qwdxasc@gmail.com", userForm.getEmail());
         return"redirect:/chat";
     }
 
@@ -80,8 +83,10 @@ public class IndexController {
     public String changePassword(@ModelAttribute("updatepassword") String updatepassword, Principal principal){
         String user = principal.getName();
         customUserDetailService.updatePassword(updatepassword , user );
-        return "redirect:/index";
+        return "redirect:/";
     }
+
+
 
 
 
