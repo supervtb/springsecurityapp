@@ -1,4 +1,4 @@
-package by.emailsender;
+package by.service;
 
 import org.hibernate.SessionFactory;
 
@@ -8,16 +8,14 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 
-/**
- * Created by albertchubakov on 23.08.17.
- */
-public class Sender {
+
+public class EmailSenderService {
 
     private String username;
     private String password;
     private Properties properties;
 
-    public Sender(String username, String password){
+    public EmailSenderService(String username, String password){
         this.username = username;
         this.password = password;
 

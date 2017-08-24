@@ -1,26 +1,20 @@
 package by.controller;
 
-import by.emailsender.Sender;
+import by.service.EmailSenderService;
 import by.model.User;
 import by.repository.UserRepository;
 import by.service.CustomUserDetailService;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.security.Principal;
-import java.util.logging.Logger;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class IndexController {
@@ -30,9 +24,6 @@ public class IndexController {
 
     @Autowired
     private CustomUserDetailService customUserDetailService;
-
-
-
 
 
 
@@ -58,8 +49,8 @@ public class IndexController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         customUserDetailService.save(userForm);
-        Sender sender  = new Sender("qwdxasc@gmail.com","12345678q");
-        sender.send("Регистрация в чате", "Вы успешно зарегистрированы, username: "+userForm.getName(), "qwdxasc@gmail.com", userForm.getEmail());
+        EmailSenderService senderService  = new EmailSenderService("qwdxasc@gmail.com","12345678q");
+        senderService.send("Регистрация в чате", "Вы успешно зарегистрированы, ваш логин: "+userForm.getName(), "qwdxasc@gmail.com", userForm.getEmail());
         return"redirect:/chat";
     }
 
@@ -75,6 +66,9 @@ public class IndexController {
     @RequestMapping(value = "/delete", method = GET)
     public String delete(Principal principal){
         String user = principal.getName();
+        User loaduser = (User) customUserDetailService.loadUserByUsername(user);
+        EmailSenderService senderService = new EmailSenderService("qwdxasc@gmail.com","12345678q");
+        senderService.send("Регистрация в чате", "Удаление аккаунта", "qwdxasc@gmail.com", loaduser.getEmail());
         customUserDetailService.delete(user);
         return "redirect:/login";
     }
