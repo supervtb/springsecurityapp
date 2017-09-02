@@ -24,4 +24,9 @@ public class MainController {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         return user;
     }
+    @GetMapping("/username")
+    public User getAdmin(String name){
+        User user = (User) customUserDetailService.loadUserByUsername(name);
+        return user;
+    }
 }

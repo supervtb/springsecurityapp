@@ -25,20 +25,27 @@ public class IndexController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
-
+    private String emailSenderLogin="qwdxasc@gmail.com";
+    private String emailSenderPassword="12345678q";
+    private String emailSenderSubject;
+    private String emailSenderText;
+    private String emailSenderTo;
 
     @RequestMapping("/")
     public String greeting() {
         return "index";
     }
+
    @RequestMapping("/login")
     public String login() {
         return "login";
     }
+
     @RequestMapping("/chat")
     public String chat() {
         return "chat";
     }
+
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(Principal principal,  Model model) {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
@@ -49,8 +56,11 @@ public class IndexController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         customUserDetailService.save(userForm);
-        EmailSenderService senderService  = new EmailSenderService("qwdxasc@gmail.com","12345678q");
-        senderService.send("Регистрация в чате", "Вы успешно зарегистрированы, ваш логин: "+userForm.getName(), "qwdxasc@gmail.com", userForm.getEmail());
+        emailSenderSubject="Регистрация в чате";
+        emailSenderText="Вы успешно зарегистрированы, ваш логин: "+userForm.getName();
+        emailSenderTo=userForm.getEmail();
+        EmailSenderService senderService  = new EmailSenderService(emailSenderLogin,emailSenderPassword);
+        senderService.send(emailSenderSubject,emailSenderText, emailSenderLogin, emailSenderTo);
         return"redirect:/chat";
     }
 
@@ -67,8 +77,11 @@ public class IndexController {
     public String delete(Principal principal){
         String user = principal.getName();
         User loaduser = (User) customUserDetailService.loadUserByUsername(user);
-        EmailSenderService senderService = new EmailSenderService("qwdxasc@gmail.com","12345678q");
-        senderService.send("Регистрация в чате", "Удаление аккаунта", "qwdxasc@gmail.com", loaduser.getEmail());
+        emailSenderSubject="Удаление аккаунта";
+        emailSenderText="Ваш аккаунт удален";
+        emailSenderTo = loaduser.getEmail();
+        EmailSenderService senderService = new EmailSenderService(emailSenderLogin,emailSenderPassword);
+        senderService.send(emailSenderSubject, emailSenderText, emailSenderLogin, emailSenderTo );
         customUserDetailService.delete(user);
         return "redirect:/login";
     }
