@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -15,7 +16,7 @@ import java.security.Principal;
  * Created by albertchubakov on 21.08.17.
  */
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/v1")
 public class MainController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
