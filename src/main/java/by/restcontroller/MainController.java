@@ -4,6 +4,7 @@ package by.restcontroller;
 import by.model.User;
 import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class MainController {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         return user;
     }
+
     @GetMapping("/username")
     public User getAdmin(String name){
         User user = (User) customUserDetailService.loadUserByUsername(name);

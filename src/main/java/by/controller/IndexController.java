@@ -2,7 +2,6 @@ package by.controller;
 
 import by.service.EmailSenderService;
 import by.model.User;
-import by.repository.UserRepository;
 import by.service.CustomUserDetailService;
 import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,23 +1,16 @@
 package by.service;
 
 import by.model.CustomUserDetails;
-import by.model.Role;
 import by.model.User;
 import by.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Created by albertchubakov on 14.08.17.
@@ -28,6 +21,7 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserRepository userRepository;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
 
     @Override
     public  UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
