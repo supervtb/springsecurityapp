@@ -1,5 +1,6 @@
 package by.controller;
 
+import by.repository.UserRepository;
 import by.service.EmailSenderService;
 import by.model.User;
 import by.service.CustomUserDetailService;

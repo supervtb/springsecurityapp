@@ -5,20 +5,21 @@ import by.model.User;
 import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 /**
  * Created by albertchubakov on 21.08.17.
  */
+
+
 @RestController
 @RequestMapping("/rest/v1")
-public class MainController {
+public class MainRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
     @GetMapping("/getuser")
@@ -27,9 +28,9 @@ public class MainController {
         return user;
     }
 
-    @GetMapping("/username")
-    public User getAdmin(String name){
-        User user = (User) customUserDetailService.loadUserByUsername(name);
+    @RequestMapping("/{username}")
+    public User username(@PathVariable("username") String username){
+        User user = (User) customUserDetailService.loadUserByUsername(username);
         return user;
     }
 }

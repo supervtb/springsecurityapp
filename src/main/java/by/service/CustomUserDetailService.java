@@ -1,7 +1,9 @@
 package by.service;
 
 import by.model.CustomUserDetails;
+import by.model.Role;
 import by.model.User;
+import by.repository.RoleRepository;
 import by.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by albertchubakov on 14.08.17.
@@ -19,6 +23,8 @@ import java.util.Optional;
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -30,8 +36,11 @@ public class CustomUserDetailService implements UserDetailsService {
        return optionalUser.map(CustomUserDetails::new).get();
    }
 
-    public void save(User user){
+   public void save(User user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.getOne(2));
+        user.setRoles(roles);
         userRepository.save(user);
 
     }
