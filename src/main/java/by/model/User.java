@@ -18,8 +18,21 @@ public class User {
     private String password;
     @Column(name="email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Column(name = "firstname")
+    private String firstname;
+    @Column(name = "secondname")
+    private String secondname;
+    @Column(name = "middlename")
+    private String middlename;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "bonuscardnumber")
+    private String bonuscardnumber;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+
+
     private Set<Role> role;
 
     public User() {
@@ -31,6 +44,11 @@ public class User {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.role = user.getRole();
+        this.firstname = user.getFirstname();
+        this.secondname = user.getSecondname();
+        this.middlename = user.getMiddlename();
+        this.phone = user.getPhone();
+        this.bonuscardnumber = user.getBonuscardnumber();
     }
 
 
@@ -50,8 +68,25 @@ public class User {
         return email;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
 
+    public String getSecondname() {
+        return secondname;
+    }
 
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getBonuscardnumber() {
+        return bonuscardnumber;
+    }
 
     public void setId(String id) {
         this.userId = id;
@@ -77,6 +112,24 @@ public class User {
         this.role = role;
     }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
+    public void setSecondname(String secondname) {
+        this.secondname = secondname;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setBonuscardnumber(String bonuscardnumber) {
+        this.bonuscardnumber = bonuscardnumber;
+    }
 }
 
