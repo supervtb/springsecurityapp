@@ -33,6 +33,7 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
                 .antMatchers("/", "/home","/registration", "/css/**", "/js/**").permitAll()
+                .antMatchers("/account").hasRole("admin")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

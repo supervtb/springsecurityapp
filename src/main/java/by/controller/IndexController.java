@@ -6,6 +6,8 @@ import by.model.User;
 import by.service.CustomUserDetailService;
 import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +47,7 @@ public class IndexController {
     public String chat() {
         return "chat";
     }
+
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(Principal principal,  Model model) {
