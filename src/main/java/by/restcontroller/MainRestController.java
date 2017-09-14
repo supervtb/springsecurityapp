@@ -27,7 +27,6 @@ public class MainRestController {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         return user;
     }
-
     @RequestMapping("/{username}")
     public User username(@PathVariable("username") String username){
         User user = (User) customUserDetailService.loadUserByUsername(username);

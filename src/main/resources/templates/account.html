@@ -22,6 +22,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/account">Аккаунт</a>
             </li>
+
+            <li  class="nav-item" sec:authorize="hasRole('ROLE_admin')" >
+                <a class="nav-link" href="/adminpanel">Админ панель</a>
+            </li>
+
             <li class="nav-item">
                 <form th:action="@{/logout}" method="post">
                     <input class="btn btn-success my-2 my-sm-0" type="submit" value="Выйти"/>

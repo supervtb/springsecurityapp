@@ -1,5 +1,8 @@
 package by;
 
+import by.model.Role;
+import by.model.User;
+import by.repository.UserRepository;
 import by.service.CustomUserDetailService;
 
 
@@ -15,13 +18,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
-
 import javax.sql.DataSource;
-
-
-
+import java.util.Arrays;
 
 @EnableJpaRepositories()
 @Configuration
@@ -33,31 +35,28 @@ public class WebSecurityConfigurerAdapter extends org.springframework.security.c
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
                 .antMatchers("/", "/home","/registration", "/css/**", "/js/**").permitAll()
-                .antMatchers("/account").hasRole("admin")
+                .antMatchers("/adminpanel/**").hasRole("admin")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll();
-
-
-
-  }
+                .permitAll()
+               ;
+    }
 
     @Autowired
     private CustomUserDetailService userDetailsService;
-  private DataSource dataSource;
-
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-
-        authenticationManagerBuilder.userDetailsService(userDetailsService)
+       authenticationManagerBuilder.userDetailsService(userDetailsService)
                .passwordEncoder(getPasswordEncoder());
     }
 
     private PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
 
 

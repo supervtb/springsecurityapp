@@ -19,6 +19,7 @@ import java.security.Principal;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
+
 public class IndexController {
 
     @Autowired
@@ -46,6 +47,11 @@ public class IndexController {
     @RequestMapping("/chat")
     public String chat() {
         return "chat";
+    }
+
+    @RequestMapping("/adminpanel")
+    public String adminpanel(){
+        return "adminpanel";
     }
 
 

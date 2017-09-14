@@ -4,7 +4,7 @@
 <head>
     <link type="text/css" href="/css/bootstrap.css" rel="stylesheet" />
     <link type="text/css" href="/css/main.css" rel="stylesheet" />
-    <title>Hello World!</title>
+    <title>Панель администратора</title>
 </head>
 <body>
 
@@ -16,15 +16,17 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Чат <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
+                <a class="nav-link" href="/chat">Чат </a>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link" href="/account">Аккаунт</a>
             </li>
-            <li  class="nav-item" sec:authorize="hasRole('ROLE_admin')" >
-                <a class="nav-link" href="/adminpanel">Админ панель</a>
+
+            <li  class="nav-item active" sec:authorize="hasRole('ROLE_admin')" >
+                <a class="nav-link" href="/adminpanel">Админ панель <span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item">
                 <form th:action="@{/logout}" method="post">
                     <input class="btn btn-success my-2 my-sm-0" type="submit" value="Выйти"/>
@@ -39,13 +41,7 @@
 
 <div class="container">
     <div class="main-container">
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<h2 th:inline="text"> Role: <span sec:authentication="principal.authorities">   </span> </h2>
-<h2 th:inline="text"> Username: <span sec:authentication="principal.name">   </span> </h2>
-
-
-
-
+        Панель администратора
     </div>
 </div>
 </body>
