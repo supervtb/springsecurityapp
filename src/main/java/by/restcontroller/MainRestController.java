@@ -32,4 +32,9 @@ public class MainRestController {
         User user = (User) customUserDetailService.loadUserByUsername(username);
         return user;
     }
+
+    @RequestMapping("/hello")
+    public String hello(){
+        return "Hello";
+    }
 }
