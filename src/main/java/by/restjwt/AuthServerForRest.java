@@ -20,32 +20,20 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class AuthServerForRest extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
-
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
-
-        ;
-    }
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
-                .withClient("clientid")
-                .secret("secret")
-                .authorizedGrantTypes("password")
-                .scopes("user_info")
-                .autoApprove(true);
-    }
-
-
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
         endpoints.authenticationManager(authenticationManager);
-
     }
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory().withClient("clientid")
+                .authorizedGrantTypes("client_credentials", "password")
+                .authorities("ROLE_CLIENT","ROLE_TRUSTED_CLIENT").scopes("read","write","trust")
+                .resourceIds("oauth2-resource").accessTokenValiditySeconds(5000).secret("secret");
+    }
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.checkTokenAccess("permitAll()");
+    }
+
 }
