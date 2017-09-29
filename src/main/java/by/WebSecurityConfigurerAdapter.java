@@ -2,6 +2,7 @@ package by;
 
 import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -26,6 +27,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Order(2)
 
 
+
 public class WebSecurityConfigurerAdapter  extends org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter{
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -42,6 +44,7 @@ public class WebSecurityConfigurerAdapter  extends org.springframework.security.
                 .loginPage("/login")
                 .permitAll()
        ;
+       System.out.println("сработал веб фильтр");
 
     }
 
