@@ -6,10 +6,12 @@ import by.model.User;
 import by.repository.RoleRepository;
 import by.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -58,7 +60,10 @@ public class CustomUserDetailService implements UserDetailsService {
        userRepository.updatePassword(bCryptPasswordEncoder.encode(password), name);
     }
 
-
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
 
 }

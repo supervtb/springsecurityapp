@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ import java.security.Principal;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/rest/v1")
 public class MainRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
-    @GetMapping("/getuser")
-    public User getUser(Principal principal, Model model){
+    @GetMapping(value = "/getuser")
+    public User getUser(Principal principal){
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         return user;
     }
@@ -34,8 +35,8 @@ public class MainRestController {
         return user;
     }
 
-    @RequestMapping("/rest/hello")
-    public String hello(){
+    @RequestMapping("/hello")
+    public  String hello(){
         return "Hello";
     }
 }
