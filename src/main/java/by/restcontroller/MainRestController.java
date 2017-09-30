@@ -19,8 +19,7 @@ import java.security.Principal;
 
 
 @RestController
-@RequestMapping("/rest/v1")
-@EnableOAuth2Client
+@RequestMapping
 public class MainRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
@@ -35,7 +34,7 @@ public class MainRestController {
         return user;
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/rest/hello")
     public String hello(){
         return "Hello";
     }

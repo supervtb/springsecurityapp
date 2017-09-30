@@ -1,4 +1,0 @@
-security:
-  oauth2:
-    resource:
-      filter-order: 3
