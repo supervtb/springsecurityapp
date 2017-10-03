@@ -30,16 +30,27 @@ submitForm(event){
     .set('Content-Type','application/x-www-form-urlencoded')
    .set('Authorization','Basic Y2xpZW50aWQ6c2VjcmV0')
   .send({"username" : "clientid" , "password ": "secret", "grant_type" : "password"})
-    .end((err, res)=> {
-        if(err) {this.setState({errorMessage:'Ошибка авторизации'}); return;}
-    localStorage.setItem('accesstoken', res.body.access_token);
-     this.props.onSuccessfulLogin();
-  })
+    .end((err, res)=> { if (res) {
+        if (err) {
+            this.setState({errorMessage: res.statusCode});
+            return;
+        }
+        localStorage.setItem('accesstoken', res.body.access_token);
+        this.props.onSuccessfulLogin();
+    }
+     else {
+        alert("Сервер недоступен");
+        return;
+    }
+    })
 }
+
 render() {
     if(this.state.errorMessage){
-        alert(this.state.errorMessage);
-        this.setState({errorMessage : undefined})
+        if (this.state.errorMessage == '400') {
+            alert("Неправильный логин или пароль");
+            this.setState({errorMessage: undefined})
+        }
     }
     
        return (
@@ -55,7 +66,6 @@ render() {
                     </div>
                     <div>
                     <TextField type="password" floatingLabelText = "Пароль" value= {this.state.password}
-                    value = {this.state.password}
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
                     <div>
@@ -75,44 +85,44 @@ render() {
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "e-mail" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "e-mail"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
                     
                     <div>
-                    <TextField type="text" floatingLabelText = "Пароль" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Пароль"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "Фамилия" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Фамилия"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "Имя" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Имя"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "Отчество" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Отчество"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "Телефон" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Телефон"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
 
                     <div>
-                    <TextField type="text" floatingLabelText = "Номер карты" value= {this.state.password}
-                    value = {this.state.password}
+                    <TextField type="text" floatingLabelText = "Номер карты"
+
                     onChange={this.handlePasswordChanged.bind(this)}/>
                     </div>
                     <div>
