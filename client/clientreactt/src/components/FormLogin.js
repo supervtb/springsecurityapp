@@ -3,6 +3,14 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import superagent from 'superagent';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import FontIcon from 'material-ui/FontIcon';
+import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
+
+const iconStyles = {
+    
+  };
+  
+
 class FromLogin extends Component {
     constructor(){
         super();
@@ -56,7 +64,7 @@ render() {
        return (
         
             <Tabs>
-    <Tab label="Вход" >
+    <Tab icon={<FontIcon className="material-icons" >apps</FontIcon>} label="Вход" >
       <div className='formcenter'> 
       <form onSubmit={this.submitForm.bind(this)}>
                     <div> 
@@ -75,7 +83,7 @@ render() {
                  
       </div>
     </Tab>
-    <Tab label="Регистрация" >
+    <Tab  icon={<FontIcon className="material-icons" >check</FontIcon>}  label="Регистрация" >
       <div className='formcenter'>
       <form onSubmit={this.submitForm.bind(this)}>
                     <div> 
@@ -135,9 +143,6 @@ render() {
                
 
 
-
-           
-           
         );
       }
     }
