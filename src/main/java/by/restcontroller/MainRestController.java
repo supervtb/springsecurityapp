@@ -39,4 +39,11 @@ public class MainRestController {
     public  String hello(){
         return "Hello";
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/registration")
+    public void saveUser(@RequestBody User user){
+        customUserDetailService.save(user);
+        System.out.println("зарегистрировать пользователя");
+        return ;
+    }
 }

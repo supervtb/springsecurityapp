@@ -22,7 +22,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http .antMatcher("/rest/**")
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/registration", "/css/**", "/js/**").permitAll()
+                .antMatchers("/", "/home", "/registration",
+                        "/css/**", "/js/**").permitAll()
+                .antMatchers("/rest/v1/registration").permitAll()
                 .antMatchers("/rest/**").authenticated()
                 .and().formLogin().permitAll();
     }

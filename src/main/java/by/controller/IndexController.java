@@ -65,12 +65,12 @@ public class IndexController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         customUserDetailService.save(userForm);
-        emailSenderSubject="Регистрация в чате";
+       /* emailSenderSubject="Регистрация в чате";
         emailSenderText="Вы успешно зарегистрированы, ваш логин: "+userForm.getName();
         emailSenderTo=userForm.getEmail();
         EmailSenderService senderService  = new EmailSenderService(emailSenderLogin,emailSenderPassword);
         senderService.send(emailSenderSubject,emailSenderText, emailSenderLogin, emailSenderTo);
-        return"redirect:/chat";
+       */ return"redirect:/chat";
     }
 
     @ExceptionHandler(JDBCException.class)
