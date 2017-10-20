@@ -44,6 +44,5 @@ public class MainRestController {
     public void saveUser(@RequestBody User user){
         customUserDetailService.save(user);
         System.out.println("зарегистрировать пользователя");
-        return ;
     }
 }

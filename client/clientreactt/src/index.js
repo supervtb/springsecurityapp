@@ -8,20 +8,19 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Login from './components/Login';
 import Home from './components/Home';
 import {Row, Col} from 'react-flexbox-grid';
+
 ReactDOM.render(
   <MuiThemeProvider>
-  
+    
   
   <Router>
 
+    <div>
     
-    <Row around='xs'>
-      <Col xs={12} md={11}>
        <Route exact  path="/" component={App} />
        <Route exact path="/login" component={Login}  />
        <Route exact path="/home" component={Home}  />
-       </Col>
-    </Row>
+       </div>
 
   </Router>
   </MuiThemeProvider> , document.getElementById('root'));
