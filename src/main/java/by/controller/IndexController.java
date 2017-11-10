@@ -85,13 +85,13 @@ public class IndexController {
     @RequestMapping(value = "/delete", method = GET)
     public String delete(Principal principal){
         String user = principal.getName();
-        User loaduser = (User) customUserDetailService.loadUserByUsername(user);
+      /*  User loaduser = (User) customUserDetailService.loadUserByUsername(user);
         emailSenderSubject="Удаление аккаунта";
         emailSenderText="Ваш аккаунт удален";
         emailSenderTo = loaduser.getEmail();
         EmailSenderService senderService = new EmailSenderService(emailSenderLogin,emailSenderPassword);
         senderService.send(emailSenderSubject, emailSenderText, emailSenderLogin, emailSenderTo );
-        customUserDetailService.delete(user);
+       */ customUserDetailService.delete(user);
         return "redirect:/login";
     }
 

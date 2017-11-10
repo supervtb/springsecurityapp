@@ -16,7 +16,6 @@ class Home extends Component {
            }
         
     }
-
     componentDidMount(){
         superagent.get('http://localhost:8082/rest/v1/getuser')
         .set('Content-Type','application/x-www-form-urlencoded')
@@ -32,14 +31,8 @@ class Home extends Component {
             localStorage.removeItem('accesstoken');
             this.setState({});
             
-        } 
-            
-        }
-
-        )
-
-        
-    }
+        }}
+        )}
     
 
 isAuthenticated(){
@@ -51,6 +44,22 @@ onClick () {
     localStorage.removeItem('accesstoken');
     this.setState({});
 }
+
+deleteaccount(){
+    superagent
+        .delete('http://localhost:8082/rest/v1/deleteaccount')
+        .set('Content-Type','application/x-www-form-urlencoded')
+        .set('Authorization','Bearer '+localStorage.getItem('accesstoken'))
+        .end((err,res) =>{
+        if (err) {
+            alert('произошла ошибка')
+        }
+        localStorage.removeItem('accesstoken');
+        this.setState({});
+        alert('Аккаунт удален');
+        } );
+}
+
 
 
 render() {
@@ -73,6 +82,7 @@ render() {
                     <div>
                     Ваш номер карты: {bonuscardnumber}
                     </div>
+                      <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
                     <div><RaisedButton onClick={this.onClick.bind(this)}   label = "Выйти" /></div>
 
                 </div>
