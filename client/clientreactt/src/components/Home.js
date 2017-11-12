@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import Header from './Header';
 import superagent from 'superagent';
+import Favorite from "./Favorite";
 
 
 class Home extends Component {
@@ -67,14 +68,18 @@ render() {
     var name = this.state.firstname;
     var secondname = this.state.secondname;
     var bonuscardnumber = this.state.bonuscardnumber;
+
     
     const isAlready = this.isAuthenticated();
+
+
     return (
       <div>
         {!isAlready ? <Redirect to= {{pathname : '/login'}} /> : (
                   <div> 
                     <div>
                         <Header />
+
                    </div>
                    <div>
                        Добрый день {name} {secondname}
@@ -85,7 +90,9 @@ render() {
                       <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
                     <div><RaisedButton onClick={this.onClick.bind(this)}   label = "Выйти" /></div>
 
-                </div>
+
+
+                  </div>
                 
 
         )}

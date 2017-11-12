@@ -43,12 +43,10 @@ public class MainRestController {
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public void saveUser(@RequestBody User user){
         customUserDetailService.save(user);
-        System.out.println("зарегистрировать пользователя");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteaccount")
     public void deleteAccount(Principal principal){
         customUserDetailService.delete(principal.getName());
-
     }
 }
