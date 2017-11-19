@@ -48,7 +48,7 @@ onClick () {
 
 deleteaccount(){
     superagent
-        .delete('http://localhost:8082/rest/v1/deleteaccount')
+        .delete('http://localhost:8082/rest/v1/user')
         .set('Content-Type','application/x-www-form-urlencoded')
         .set('Authorization','Bearer '+localStorage.getItem('accesstoken'))
         .end((err,res) =>{

@@ -83,7 +83,7 @@ submitForm(event){
 registration(event){
     event.preventDefault();
    superagent
-   .post('http://localhost:8082/rest/v1/registration')
+   .post('http://localhost:8082/rest/v1/user')
    .set('Content-Type','application/json')
    .send({
     "name":this.state.username,

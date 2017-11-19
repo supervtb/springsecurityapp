@@ -3,6 +3,7 @@ package by;
 import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/registration",
                         "/css/**", "/js/**").permitAll()
-                .antMatchers("/rest/v1/registration").permitAll()
+                .antMatchers(HttpMethod.POST,"/rest/v1/user").permitAll()
                 .antMatchers("/rest/**").authenticated()
                 .and().formLogin().permitAll();
     }
