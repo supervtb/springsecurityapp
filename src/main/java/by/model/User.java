@@ -3,6 +3,8 @@ package by.model;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
+import java.lang.annotation.Repeatable;
+import java.util.List;
 import java.util.Set;
 
 
@@ -33,14 +35,12 @@ public class User {
     @Column(name = "points")
     private int points;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 
 
-
+   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 
     private Set<Role> role;
-
 
     public User() {
     }
@@ -149,5 +149,6 @@ public class User {
     public void setPoints(int points) {
         this.points = points;
     }
+
 }
 

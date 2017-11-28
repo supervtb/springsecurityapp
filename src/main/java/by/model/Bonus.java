@@ -21,7 +21,6 @@ public class Bonus {
 
 
 
-
     public int getBonusId() {
         return bonusId;
     }
