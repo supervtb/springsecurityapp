@@ -1,7 +1,10 @@
 package by.restcontroller;
 
 
+import by.model.Bonus;
 import by.model.User;
+import by.repository.BonusRepository;
+import by.service.BonusService;
 import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.config.EnableHypermediaSupport;

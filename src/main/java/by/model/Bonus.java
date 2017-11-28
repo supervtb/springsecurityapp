@@ -1,17 +1,22 @@
 package by.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by albertchubakov on 28.11.2017.
  */
 @Entity
+@Table(name = "bonus")
 public class Bonus {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "bonus_id" )
     private int bonusId;
+    @Column(name = "name_bonus")
     private String nameBonus;
+    @Column(name = "description_bonus")
     private String descriptionBonus;
+    @Column(name = "price_bonus")
     private int priceBonus;
 
 
