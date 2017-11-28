@@ -43,11 +43,6 @@ public class CustomUserDetailService implements UserDetailsService {
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(2));
         user.setRoles(roles);
-        user.setFirstname(user.getFirstname());
-        user.setSecondname(user.getSecondname());
-        user.setMiddlename(user.getMiddlename());
-        user.setPhone(user.getPhone());
-        user.setBonuscardnumber(user.getBonuscardnumber());
         user.setPoints(1 + (int) (Math.random() * 1000));
         userRepository.save(user);
 
