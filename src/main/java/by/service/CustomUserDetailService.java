@@ -48,6 +48,7 @@ public class CustomUserDetailService implements UserDetailsService {
         user.setMiddlename(user.getMiddlename());
         user.setPhone(user.getPhone());
         user.setBonuscardnumber(user.getBonuscardnumber());
+        user.setPoints(1 + (int) (Math.random() * 1000));
         userRepository.save(user);
 
     }

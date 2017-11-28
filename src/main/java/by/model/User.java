@@ -30,12 +30,17 @@ public class User {
     private String phone;
     @Column(name = "bonuscardnumber")
     private String bonuscardnumber;
+    @Column(name = "points")
+    private int points;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 
 
+
+
     private Set<Role> role;
+
 
     public User() {
     }
@@ -51,6 +56,8 @@ public class User {
         this.middlename = user.getMiddlename();
         this.phone = user.getPhone();
         this.bonuscardnumber = user.getBonuscardnumber();
+        this.points = user.getPoints();
+
     }
 
 
@@ -114,6 +121,7 @@ public class User {
         this.role = role;
     }
 
+
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
@@ -132,6 +140,14 @@ public class User {
 
     public void setBonuscardnumber(String bonuscardnumber) {
         this.bonuscardnumber = bonuscardnumber;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
 

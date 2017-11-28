@@ -25,7 +25,8 @@ class Home extends Component {
             this.setState({
                 firstname:res.body.firstname,
                 secondname:res.body.secondname,
-                bonuscardnumber: res.body.bonuscardnumber
+                bonuscardnumber: res.body.bonuscardnumber,
+                points: res.body.points
                 })
         }
         else {
@@ -68,6 +69,7 @@ render() {
     var name = this.state.firstname;
     var secondname = this.state.secondname;
     var bonuscardnumber = this.state.bonuscardnumber;
+    var points = this.state.points;
 
     
     const isAlready = this.isAuthenticated();
@@ -87,6 +89,9 @@ render() {
                     <div>
                     Ваш номер карты: {bonuscardnumber}
                     </div>
+                      <div>
+                          Количество баллов: {points}
+                      </div>
                       <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
                     <div><RaisedButton onClick={this.onClick.bind(this)}   label = "Выйти" /></div>
 
