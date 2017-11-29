@@ -38,8 +38,13 @@ public class User {
 
    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+   private Set<Role> role;
 
-    private Set<Role> role;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_bonus", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "bonus_id"))
+    private List<Bonus> bonus;
+
 
     public User() {
     }
@@ -56,6 +61,7 @@ public class User {
         this.phone = user.getPhone();
         this.bonuscardnumber = user.getBonuscardnumber();
         this.points = user.getPoints();
+        this.bonus = user.getBonus();
 
     }
 
@@ -149,5 +155,12 @@ public class User {
         this.points = points;
     }
 
+    public List<Bonus> getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(List<Bonus> bonus) {
+        this.bonus = bonus;
+    }
 }
 
