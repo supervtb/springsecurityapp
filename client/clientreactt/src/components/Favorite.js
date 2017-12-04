@@ -13,10 +13,13 @@ class Favorite extends Component {
 
 
 
-    render() {
-        return ( <div>
-                fgergergerger
 
+    render() {
+
+        return ( <div>
+          <div>
+              Добрый день
+           </div>
             </div>
         );
     }
