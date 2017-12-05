@@ -5,8 +5,6 @@ import {Redirect} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import Header from './Header';
 import superagent from 'superagent';
-import Favorite from "./Favorite";
-
 
 class Home extends Component {
   constructor(){
@@ -15,11 +13,7 @@ class Home extends Component {
             firstname : "",
            }
 }
-
-
-
-
-    componentDidMount(){
+ componentDidMount(){
         superagent.get('http://localhost:8082/rest/v1/user')
         .set('Content-Type','application/x-www-form-urlencoded')
         .set('Authorization','Bearer '+localStorage.getItem('accesstoken'))
@@ -66,19 +60,19 @@ deleteaccount(){
         alert('Аккаунт удален');
         } );
 }
-
-
-
-
 render() {
-  var test = this.state.selectedIndex;
-  if (test==1) {
-      var otrisovat = <Favorite />
-  }
-
-
-
-  var  bonus = this.state.bonuses ;
+  var name = this.state.firstname;
+var secondname = this.state.secondname;
+var bonuscardnumber = this.state.bonuscardnumber;
+var points = this.state.points;
+var  bonus = this.state.bonuses ;
+var value1 = {
+     name: this.state.firstname,
+     secondname : this.state.secondname,
+     bonuscardnumber : this.state.bonuscardnumber,
+     points : this.state.points,
+     bonus : this.state.bonuses
+    }
   var arr = []
   for( var key in bonus){
   arr.push(bonus[key])
@@ -92,34 +86,21 @@ var newsTemplate = arr.map(function(item, index) {
       )
     })
 
-    var name = this.state.firstname;
-    var secondname = this.state.secondname;
-    var bonuscardnumber = this.state.bonuscardnumber;
-    var points = this.state.points;
+    
 
 
 
   const isAlready = this.isAuthenticated();
+  
 return (
       <div>
         {!isAlready ? <Redirect to= {{pathname : '/login'}} /> : (
                   <div>
                   <div>
-                  <Header />
+                  <Header data={value1}/>
                   </div>
-                   <div>
-                       Добрый день {name} {secondname}
-                    </div>
-                    <div>
-                    Ваш номер карты: {bonuscardnumber}
-                    </div>
-                      <div>
-                          Количество баллов: {points}
-                      </div>
-                      <div>
-                          Подключенные бонусы: {newsTemplate}
-                      </div>
-                      <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
+                  
+                    <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
                     <div><RaisedButton onClick={this.onClick.bind(this)}   label = "Выйти" /></div>
 
   </div>

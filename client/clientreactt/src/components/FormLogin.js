@@ -4,12 +4,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import superagent from 'superagent';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
-import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 
-const iconStyles = {
-    
-  };
-  
+
+
 
 class FromLogin extends Component {
     constructor(){
@@ -24,15 +21,15 @@ class FromLogin extends Component {
             phone : "",
             bonuscardnumber : ""
         }
-        
+
     }
 handleUsernameChanged(event){
     this.setState({username: event.target.value})
-    
+
 }
 handlePasswordChanged(event){
     this.setState({password: event.target.value})
-    
+
 }
 
 handleEmailChanged(event){
@@ -119,15 +116,15 @@ render() {
             this.setState({errorMessage: undefined})
         }
     }
-    
+
        return (
-        
+
             <Tabs>
     <Tab icon={<FontIcon className="material-icons" >apps</FontIcon>} label="Вход" >
-      <div className='formcenter'> 
+      <div className='formcenter'>
       <form onSubmit={this.submitForm.bind(this)}>
-                    <div> 
-                    <TextField  floatingLabelText = "Логин" 
+                    <div>
+                    <TextField  floatingLabelText = "Логин"
                     value = {this.state.username}
                     onChange={this.handleUsernameChanged.bind(this)}/>
                     </div>
@@ -139,55 +136,55 @@ render() {
                     <RaisedButton  type="submit" label = "Войти" />
                      </div>
                      </form>
-                 
+
       </div>
     </Tab>
     <Tab  icon={<FontIcon className="material-icons" >check</FontIcon>}  label="Регистрация" >
       <div className='formcenter'>
       <form onSubmit={this.registration.bind(this)}>
                   <div>
-                    <TextField  className='registration' floatingLabelText = "Логин" 
+                    <TextField  className='registration' floatingLabelText = "Логин"
                     value = {this.state.username}
                     onChange={this.handleUsernameChanged.bind(this)}/>
-                   
 
-                    
+
+
                     <TextField className='registration'  type="text" floatingLabelText = "e-mail"
                     value = {this.state.email}
                     onChange={this.handleEmailChanged.bind(this)}/>
-                   
-                    
-                  
+
+
+
                     <TextField className='registration' type="text" floatingLabelText = "Пароль"
                     value = {this.state.password}
                     onChange={this.handlePasswordChanged.bind(this)}/>
-                  
+
                         </div>
                     <div>
                     <TextField className='registration' type="text" floatingLabelText = "Фамилия"
                     value = {this.state.secondname}
                     onChange={this.handleSecondnameChanged.bind(this)}/>
-                   
 
-                    
+
+
                     <TextField className='registration' type="text" floatingLabelText = "Имя"
                         value = {this.state.firstname}
                     onChange={this.handleFirstnameChanged.bind(this)}/>
-                    
 
-                    
+
+
                     <TextField className='registration' type="text" floatingLabelText = "Отчество"
                     value = {this.state.middlename}
                     onChange={this.handleMiddlenameChanged.bind(this)}/>
                     </div>
 
-                   
+
                     <TextField className='registration' type="text" floatingLabelText = "Телефон"
                     value = {this.state.phone}
                     onChange={this.handlePhoneChanged.bind(this)}/>
-                   
 
-                   
+
+
                     <TextField className='registration' type="text" floatingLabelText = "Номер карты"
                     value = {this.state.bonuscardnumber}
                     onChange={this.handleBonuscardnumberChanged.bind(this)}/>
@@ -198,7 +195,7 @@ render() {
       </div>
     </Tab>
     </Tabs>
-               
+
 
 
         );
@@ -206,4 +203,3 @@ render() {
     }
 
     export default FromLogin;
-      

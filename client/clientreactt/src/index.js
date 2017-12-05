@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Login from './components/Login';
 import Home from './components/Home';
-import {Row, Col} from 'react-flexbox-grid';
+
 
 ReactDOM.render(
   <MuiThemeProvider>
