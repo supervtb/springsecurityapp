@@ -47,8 +47,8 @@ public class MainRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/user")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody User user){
-        User currentUser = (User) customUserDetailService.loadUserByUsername(user.getName());
+    public void update(@RequestBody User user, Principal principal){
+        User currentUser = (User) customUserDetailService.loadUserByUsername(principal.getName());
         if(user.getPassword()!=null)
             currentUser.setPassword(user.getPassword());
         if(user.getEmail()!=null)
