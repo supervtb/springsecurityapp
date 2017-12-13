@@ -46,6 +46,7 @@ public class CustomUserDetailService implements UserDetailsService {
         user.setPoints(1 + (int) (Math.random() * 1000));
         userRepository.save(user);
 
+
     }
 
     public void delete(String user){
@@ -54,6 +55,18 @@ public class CustomUserDetailService implements UserDetailsService {
 
     public void updatePassword(String password, String name){
        userRepository.updatePassword(bCryptPasswordEncoder.encode(password), name);
+    }
+
+    public void update(User updatedUser){
+        userRepository.update(updatedUser.getName(),
+                bCryptPasswordEncoder.encode(updatedUser.getPassword()),
+                updatedUser.getEmail(),
+                updatedUser.getFirstname(),
+                updatedUser.getSecondname(),
+                updatedUser.getMiddlename(),
+                updatedUser.getPhone(),
+                updatedUser.getBonuscardnumber()
+                );
     }
 
     @Bean

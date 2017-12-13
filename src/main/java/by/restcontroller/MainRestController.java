@@ -45,6 +45,28 @@ public class MainRestController {
         customUserDetailService.save(user);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/user")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody User user){
+        User currentUser = (User) customUserDetailService.loadUserByUsername(user.getName());
+        if(user.getPassword()!=null)
+            currentUser.setPassword(user.getPassword());
+        if(user.getEmail()!=null)
+            currentUser.setEmail(user.getEmail());
+        if(user.getFirstname()!=null)
+            currentUser.setFirstname(user.getFirstname());
+        if(user.getSecondname()!=null)
+            currentUser.setSecondname(user.getSecondname());
+        if(user.getMiddlename()!=null)
+            currentUser.setMiddlename(user.getMiddlename());
+        if(user.getPhone()!=null)
+            currentUser.setPhone(user.getPhone());
+        if(user.getBonuscardnumber()!=null)
+            currentUser.setBonuscardnumber(user.getBonuscardnumber());
+        customUserDetailService.update(currentUser);
+    }
+
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/user")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAccount(Principal principal){
