@@ -59,7 +59,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
     public void update(User updatedUser){
         userRepository.update(updatedUser.getName(),
-                bCryptPasswordEncoder.encode(updatedUser.getPassword()),
                 updatedUser.getEmail(),
                 updatedUser.getFirstname(),
                 updatedUser.getSecondname(),

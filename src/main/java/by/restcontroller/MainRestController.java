@@ -49,8 +49,6 @@ public class MainRestController {
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody User user, Principal principal){
         User currentUser = (User) customUserDetailService.loadUserByUsername(principal.getName());
-        if(user.getPassword()!=null)
-            currentUser.setPassword(user.getPassword());
         if(user.getEmail()!=null)
             currentUser.setEmail(user.getEmail());
         if(user.getFirstname()!=null)
@@ -68,7 +66,7 @@ public class MainRestController {
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/user")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteAccount(Principal principal){
         customUserDetailService.delete(principal.getName());
     }
