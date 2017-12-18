@@ -1,10 +1,13 @@
 package by.service;
 
-import by.model.CustomUserDetails;
-import by.model.Role;
-import by.model.User;
+import by.customexception.NotEnoughPointsException;
+import by.model.*;
+import by.repository.BonusRepository;
 import by.repository.RoleRepository;
+
 import by.repository.UserRepository;
+import org.hibernate.Session;
+import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import javax.jws.soap.SOAPBinding;
+import javax.transaction.Transactional;
+import java.security.Principal;
+import java.util.*;
 
 /**
  * Created by albertchubakov on 14.08.17.
@@ -27,6 +31,8 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private BonusRepository bonusRepository;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -44,6 +50,10 @@ public class CustomUserDetailService implements UserDetailsService {
         roles.add(roleRepository.getOne(2));
         user.setRoles(roles);
         user.setPoints(1 + (int) (Math.random() * 1000));
+       // List<Bonus> bonuses = new ArrayList<>();
+       // bonuses.add(bonusRepository.getOne(2));
+       // user.setBonus(bonuses);
+
         userRepository.save(user);
 
 
@@ -67,6 +77,25 @@ public class CustomUserDetailService implements UserDetailsService {
                 updatedUser.getBonuscardnumber()
                 );
     }
+
+    public void addBonusToUser(int userId) throws NotEnoughPointsException {
+        User user1 = userRepository.getOne(userId);
+        Bonus bonus1 = bonusRepository.getOne(2);
+        if((user1.getPoints()) >= (bonus1.getPriceBonus())){
+            List<Bonus> bonuses = new ArrayList<>();
+            bonuses.add(bonusRepository.getOne(2));
+            user1.setPoints((user1.getPoints())-(bonus1.getPriceBonus()));
+            user1.setBonus(bonuses);
+            userRepository.save(user1);
+        }
+        else {
+            throw new NotEnoughPointsException("Недостаточно баллов");
+        }
+
+
+    }
+
+
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){

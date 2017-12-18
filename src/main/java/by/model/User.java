@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="user_id")
-    private String userId;
+    private int userId;
     @Column(name="name")
     private String name;
     @Column(name="password")
@@ -66,7 +66,7 @@ public class User {
     }
 
 
-    public String getId(){
+    public int getId(){
         return userId;
     }
 
@@ -102,7 +102,7 @@ public class User {
         return bonuscardnumber;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.userId = id;
     }
 

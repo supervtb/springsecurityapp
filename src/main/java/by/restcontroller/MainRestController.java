@@ -1,6 +1,7 @@
 package by.restcontroller;
 
 
+import by.customexception.NotEnoughPointsException;
 import by.model.Bonus;
 import by.model.User;
 import by.repository.BonusRepository;
@@ -70,4 +71,13 @@ public class MainRestController {
     public void deleteAccount(Principal principal){
         customUserDetailService.delete(principal.getName());
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/user/bonuses")
+    @ResponseStatus(HttpStatus.OK)
+    public void addBonusToUser(Principal principal) throws NotEnoughPointsException {
+        User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
+    customUserDetailService.addBonusToUser(user.getId());
+
+    }
+
 }

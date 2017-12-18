@@ -1,12 +1,17 @@
 package by.repository;
 
+import by.model.Bonus;
 import by.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  * Created by albertchubakov on 14.08.17.
@@ -28,7 +33,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
    @Modifying
    @Transactional
-   @Query(value = "update User u set u.email = ?2, u.firstname = ?3, u.secondname = ?4, u.middlename= ?5, u.phone = ?6, u.bonuscardnumber = ?7 where u.name = ?1 ")
+   @Query(value = "update User u set   u.email = ?2, u.firstname = ?3, u.secondname = ?4, u.middlename= ?5, u.phone = ?6, u.bonuscardnumber = ?7 where u.name = ?1 ")
    void update(String name,
                String email,
                String firstname,
@@ -36,4 +41,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                String middlename,
                String phone,
                String bonuscardnumber);
+
+   @Modifying
+   @Transactional
+   @Query(value = "update  User  u set u.bonus = ?1 where u.id=?2")
+   void addBonus(User user);
+
 }
+
+
