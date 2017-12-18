@@ -42,10 +42,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                String phone,
                String bonuscardnumber);
 
-   @Modifying
-   @Transactional
-   @Query(value = "update  User  u set u.bonus = ?1 where u.id=?2")
-   void addBonus(User user);
 
 }
 
