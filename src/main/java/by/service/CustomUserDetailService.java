@@ -50,14 +50,8 @@ public class CustomUserDetailService implements UserDetailsService {
         roles.add(roleRepository.getOne(2));
         user.setRoles(roles);
         user.setPoints(1 + (int) (Math.random() * 1000));
-       // List<Bonus> bonuses = new ArrayList<>();
-       // bonuses.add(bonusRepository.getOne(2));
-       // user.setBonus(bonuses);
-
         userRepository.save(user);
-
-
-    }
+   }
 
     public void delete(String user){
        userRepository.deleteByName(user);
@@ -80,7 +74,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     public void addBonusToUser(int userId) throws NotEnoughPointsException {
         User user1 = userRepository.getOne(userId);
-        Bonus bonus1 = bonusRepository.getOne(2);
+        Bonus bonus1 = bonusRepository.getOne(2); //хардкод для теста
         if((user1.getPoints()) >= (bonus1.getPriceBonus())){
             List<Bonus> bonuses = new ArrayList<>();
             bonuses.add(bonusRepository.getOne(2));
