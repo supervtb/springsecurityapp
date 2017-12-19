@@ -72,12 +72,12 @@ public class CustomUserDetailService implements UserDetailsService {
                 );
     }
 
-    public void addBonusToUser(int userId) throws NotEnoughPointsException {
+    public void addBonusToUser(int userId, int bonusId) throws NotEnoughPointsException {
         User user1 = userRepository.getOne(userId);
-        Bonus bonus1 = bonusRepository.getOne(2); //хардкод для теста
+        Bonus bonus1 = bonusRepository.getOne(bonusId); //хардкод для теста
         if((user1.getPoints()) >= (bonus1.getPriceBonus())){
             List<Bonus> bonuses = new ArrayList<>();
-            bonuses.add(bonusRepository.getOne(2));
+            bonuses.add(bonusRepository.getOne(bonusId));
             user1.setPoints((user1.getPoints())-(bonus1.getPriceBonus()));
             user1.setBonus(bonuses);
             userRepository.save(user1);
@@ -85,11 +85,7 @@ public class CustomUserDetailService implements UserDetailsService {
         else {
             throw new NotEnoughPointsException("Недостаточно баллов");
         }
-
-
     }
-
-
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){

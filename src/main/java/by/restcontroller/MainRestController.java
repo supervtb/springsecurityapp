@@ -74,9 +74,9 @@ public class MainRestController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/user/bonuses")
     @ResponseStatus(HttpStatus.OK)
-    public void addBonusToUser(Principal principal) throws NotEnoughPointsException {
+    public void addBonusToUser(@RequestBody Bonus bonusId, Principal principal) throws NotEnoughPointsException {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
-    customUserDetailService.addBonusToUser(user.getId());
+        customUserDetailService.addBonusToUser(user.getId(), bonusId.getBonusId());
 
     }
 

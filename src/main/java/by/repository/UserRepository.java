@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
    Optional<User>  findByName(String name);
 
+
    @Modifying
    @Transactional
    @Query(value = "delete from User u where u.name = ?1 ")
