@@ -70,6 +70,8 @@ deleteaccount(){
         alert('Аккаунт удален');
         } );
 }
+
+
 render() {
 
 var value1 = {
@@ -95,8 +97,7 @@ return (
                   <div>
                   <Header data={value1}/>
                   </div>
-                  
-                    <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
+                      <div><RaisedButton onClick={this.deleteaccount.bind(this)}   label = "Удалить аккаунт" /></div>
                     <div><RaisedButton onClick={this.onClick.bind(this)}   label = "Выйти" /></div>
 
   </div>

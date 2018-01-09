@@ -16,7 +16,6 @@ render() {
         var arr = []
         for( var key in bonus){
         arr.push(bonus[key])
-        console.log(bonus[key].bonusId);
       }
         
         var newsTemplate = arr.map(function(item, index) {
