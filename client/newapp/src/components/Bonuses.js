@@ -35,10 +35,10 @@ class Bonuses extends Component {
                         />
                         <CardText>
                             {item.descriptionBonus}
+                            <div> Стоимость:  {item.priceBonus} </div>
                         </CardText>
                         <CardActions>
-                            <FlatButton label="Action1" />
-                            <FlatButton label="Action2" />
+                            <FlatButton label="Добавить" />
                         </CardActions>
                     </Card>
                 </div>

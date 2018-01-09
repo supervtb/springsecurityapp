@@ -76,7 +76,7 @@ public class CustomUserDetailService implements UserDetailsService {
         User user1 = userRepository.getOne(userId);
         Bonus bonus1 = bonusRepository.getOne(bonusId); //хардкод для теста
         if((user1.getPoints()) >= (bonus1.getPriceBonus())){
-            List<Bonus> bonuses = new ArrayList<>();
+            List<Bonus> bonuses = user1.getBonus();
             bonuses.add(bonusRepository.getOne(bonusId));
             user1.setPoints((user1.getPoints())-(bonus1.getPriceBonus()));
             user1.setBonus(bonuses);
