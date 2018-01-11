@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by albertchubakov on 21.08.17.
@@ -77,7 +79,19 @@ public class MainRestController {
     public void addBonusToUser(@RequestBody Bonus bonusId, Principal principal) throws NotEnoughPointsException {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         customUserDetailService.addBonusToUser(user.getId(), bonusId.getBonusId());
-
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value ="/user/bonuses" )
+    @ResponseStatus(HttpStatus.OK)
+    public void removeBonusToUser(@RequestBody List<Bonus> bonusId, Principal principal){
+        User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (Bonus obj : bonusId){
+            arrayList.add(obj.getBonusId());
+        }
+        customUserDetailService.removeBonusesToUser(user.getId(), arrayList);
+    }
+
+
 
 }

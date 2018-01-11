@@ -48,6 +48,7 @@ class Bonuses extends Component {
                               } else {
                                   alert('бонус добавлен');
                                   bonus.push(item);
+
                               }
                           });
 

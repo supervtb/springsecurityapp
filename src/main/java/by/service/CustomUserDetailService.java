@@ -1,5 +1,6 @@
 package by.service;
 
+import by.customexception.BonusNotFoundException;
 import by.customexception.NotEnoughPointsException;
 import by.model.*;
 import by.repository.BonusRepository;
@@ -85,6 +86,27 @@ public class CustomUserDetailService implements UserDetailsService {
         else {
             throw new NotEnoughPointsException("Недостаточно баллов");
         }
+    }
+
+    public void removeBonusToUser(int userId, int bonusId) {
+        User user1 = userRepository.getOne(userId);
+        Bonus bonus1 = bonusRepository.getOne(bonusId);
+        List<Bonus> bonuses = user1.getBonus();
+        bonuses.remove(bonus1);
+        user1.setBonus(bonuses);
+        userRepository.save(user1);
+    }
+
+    public void removeBonusesToUser(int userId, ArrayList<Integer> arrayList){
+        User user1 = userRepository.getOne(userId);
+       List<Bonus> bonuses = user1.getBonus();
+       List<Bonus> bonuses1 = new ArrayList<>();
+       for(Integer i : arrayList){
+           bonuses1.add(bonusRepository.getOne(i));
+       }
+       bonuses.removeAll(bonuses1);
+       user1.setBonus(bonuses);
+       userRepository.save(user1);
     }
 
     @Bean
