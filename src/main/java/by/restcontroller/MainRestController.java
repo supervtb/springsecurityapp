@@ -36,11 +36,11 @@ public class MainRestController {
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         return user;
     }
-    @RequestMapping("/user/{username}")
-    public User username(@PathVariable("username") String username){
-        User user = (User) customUserDetailService.loadUserByUsername(username);
-        return user;
-    }
+//    @RequestMapping("/user/{username}")
+//    public User username(@PathVariable("username") String username){
+//        User user = (User) customUserDetailService.loadUserByUsername(username);
+//        return user;
+//    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/user")
     @ResponseStatus(HttpStatus.CREATED)
