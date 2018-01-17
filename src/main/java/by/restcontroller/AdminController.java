@@ -22,11 +22,16 @@ public class AdminController extends MainRestController{
     @Autowired
     private CustomUserDetailService customUserDetailService;
     @GetMapping(value = "/users")
-
     public List<User> getAllUsers(){
         List<User> users;
         users = customUserDetailService.loadAllUser();
         return users;
+    }
+
+    @RequestMapping("/user/{username}")
+    public User username(@PathVariable("username") String username){
+        User user = (User) customUserDetailService.loadUserByUsername(username);
+       return user;
     }
 
 
