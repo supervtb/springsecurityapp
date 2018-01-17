@@ -45,6 +45,11 @@ public class CustomUserDetailService implements UserDetailsService {
        return optionalUser.map(CustomUserDetails::new).get();
    }
 
+   public List<User> loadAllUser(){
+        List<User> users = userRepository.findAll();
+        return users;
+   }
+
    public void save(User user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
