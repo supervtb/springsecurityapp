@@ -22,13 +22,4 @@ public class BonusService  {
         return bonuses;
     }
 
-    public void save(Bonus bonus){
-        bonus.setNameBonus(bonus.getNameBonus());
-        bonus.setDescriptionBonus(bonus.getDescriptionBonus());
-        bonus.setPriceBonus(bonus.getPriceBonus());
-        bonusRepository.save(bonus);
-
-    }
-
-
 }

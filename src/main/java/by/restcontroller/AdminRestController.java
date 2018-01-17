@@ -35,5 +35,24 @@ public class AdminRestController {
        return user;
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@PathVariable("username") String username ,@RequestBody User user, Principal principal){
+        User currentUser = (User) customUserDetailService.loadUserByUsername(username);
+        if(user.getEmail()!=null)
+            currentUser.setEmail(user.getEmail());
+        if(user.getFirstname()!=null)
+            currentUser.setFirstname(user.getFirstname());
+        if(user.getSecondname()!=null)
+            currentUser.setSecondname(user.getSecondname());
+        if(user.getMiddlename()!=null)
+            currentUser.setMiddlename(user.getMiddlename());
+        if(user.getPhone()!=null)
+            currentUser.setPhone(user.getPhone());
+        if(user.getBonuscardnumber()!=null)
+            currentUser.setBonuscardnumber(user.getBonuscardnumber());
+        customUserDetailService.update(currentUser);
+    }
+
 
 }
