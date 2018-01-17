@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/v1/admin")
-public class AdminController extends MainRestController{
+public class AdminController{
     @Autowired
     private CustomUserDetailService customUserDetailService;
     @GetMapping(value = "/users")
