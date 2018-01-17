@@ -18,9 +18,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/v1/admin")
-public class AdminController{
+public class AdminRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
     @GetMapping(value = "/users")
     public List<User> getAllUsers(){
         List<User> users;
@@ -28,7 +29,7 @@ public class AdminController{
         return users;
     }
 
-    @RequestMapping("/user/{username}")
+    @RequestMapping("/users/{username}")
     public User username(@PathVariable("username") String username){
         User user = (User) customUserDetailService.loadUserByUsername(username);
        return user;
