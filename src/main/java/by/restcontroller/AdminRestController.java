@@ -37,7 +37,7 @@ public class AdminRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("username") String username ,@RequestBody User user, Principal principal){
+    public void update(@PathVariable("username") String username ,@RequestBody User user){
         User currentUser = (User) customUserDetailService.loadUserByUsername(username);
         if(user.getEmail()!=null)
             currentUser.setEmail(user.getEmail());

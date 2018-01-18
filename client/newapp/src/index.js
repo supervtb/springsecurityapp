@@ -12,13 +12,9 @@ import Home from './components/Home';
 
 ReactDOM.render(
   <MuiThemeProvider>
-
-
-  <Router>
-
-    <div>
-
-       <Route exact  path="/" component={App} />
+      <Router>
+      <div>
+        <Route exact  path="/" component={App} />
        <Route exact path="/login" component={Login}  />
        <Route exact path="/home" component={Home}  />
        </div>
