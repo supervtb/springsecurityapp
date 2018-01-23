@@ -76,7 +76,7 @@ public class MainRestController {
         customUserDetailService.addBonusToUser(user.getId(), bonusId.getBonusId());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value ="/user/bonuses" )
+    @RequestMapping(method = RequestMethod.DELETE, value ="/user/bonuses/" )
     @ResponseStatus(HttpStatus.OK)
     public void removeBonusToUser(@RequestBody List<Bonus> bonusId, Principal principal){
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());

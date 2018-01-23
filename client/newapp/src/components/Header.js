@@ -24,14 +24,6 @@ class Header extends Component {
  
 
    render() {
-       let BottomNavigationItemAdmin;
-                if(2==1) {
-                     BottomNavigationItemAdmin = <BottomNavigationItem
-                        label="Админ панель"
-                        icon={nearbyIcon}
-                        onClick={() => this.select(2)}
-                    />;
-                }
        var selectedIndex = this.state.selectedIndex;
        if (selectedIndex==0) {
         var otrisovat = <Account data={this.props.data} />

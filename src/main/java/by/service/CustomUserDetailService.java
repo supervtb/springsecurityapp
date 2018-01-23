@@ -93,15 +93,6 @@ public class CustomUserDetailService implements UserDetailsService {
         }
     }
 
-    public void removeBonusToUser(int userId, int bonusId) {
-        User user1 = userRepository.getOne(userId);
-        Bonus bonus1 = bonusRepository.getOne(bonusId);
-        List<Bonus> bonuses = user1.getBonus();
-        bonuses.remove(bonus1);
-        user1.setBonus(bonuses);
-        userRepository.save(user1);
-    }
-
     public void removeBonusesToUser(int userId, ArrayList<Integer> arrayList){
         User user1 = userRepository.getOne(userId);
        List<Bonus> bonuses = user1.getBonus();

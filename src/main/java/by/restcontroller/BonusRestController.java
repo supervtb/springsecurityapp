@@ -1,11 +1,14 @@
 package by.restcontroller;
 
 import by.model.Bonus;
+import by.model.User;
 import by.service.BonusService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +26,28 @@ public class BonusRestController {
         List<Bonus> bonuses;
         bonuses = bonusService.loadAllBonuses();
         return  bonuses;
+    }
+    @RequestMapping( method = RequestMethod.GET, value = "/bonuses/{bonusId}")
+    public Bonus getBonus(@PathVariable Integer bonusId){
+        Bonus bonus = bonusService.getBonusById(bonusId);
+        return bonus;
+    }
+
+
+    @RequestMapping( method = RequestMethod.POST, value = "/bonuses")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createBonus(@RequestBody Bonus bonus){
+        bonusService.save(bonus);
+    }
+    @RequestMapping( method = RequestMethod.PUT, value = "/bonuses")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBonus(@RequestBody Bonus bonus){
+        bonusService.save(bonus);
+    }
+    @RequestMapping( method = RequestMethod.DELETE, value = "/bonuses/{bonusId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable Integer bonusId){
+        bonusService.delete(bonusId);
+
     }
 }

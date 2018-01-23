@@ -22,4 +22,17 @@ public class BonusService  {
         return bonuses;
     }
 
+    public Bonus getBonusById(Integer bonusId){
+        Bonus bonus = bonusRepository.findOne(bonusId);
+        return bonus;
+    }
+
+    public void save(Bonus bonus){
+        bonusRepository.save(bonus);
+    }
+
+    public void delete(Integer bonusId){
+        bonusRepository.delete(bonusId);
+    }
+
 }
