@@ -38,11 +38,7 @@ public class BonusService  {
         bonusRepository.save(bonus);
     }
 
-    public void save(Bonus bonus, Integer storeId){
-        Store store = storeRepository.getOne(storeId);
-        bonus.setStore(store);
-        bonusRepository.save(bonus);
-    }
+
 
     public void delete(Integer bonusId){
         bonusRepository.delete(bonusId);
