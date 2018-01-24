@@ -1,8 +1,10 @@
 package by.restcontroller;
 
+import by.customexception.GeneralCustomException;
 import by.customexception.NotEnoughPointsException;
 import by.model.Bonus;
 import by.model.Role;
+import by.model.Store;
 import by.model.User;
 import by.service.BonusService;
 import by.service.CustomUserDetailService;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ import java.util.Set;
 public class BonusRestController {
     @Autowired
     private BonusService bonusService;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
 
     @RequestMapping(value = "/bonuses")
     public List<Bonus> getAllBonus(){
@@ -40,8 +46,19 @@ public class BonusRestController {
 
     @RequestMapping( method = RequestMethod.POST, value = "/bonuses")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createBonus(@RequestBody Bonus bonus){
-        bonusService.save(bonus);
+    public void createBonus(@RequestBody Bonus bonus , Principal principal) throws GeneralCustomException {
+        User currentUser = (User) customUserDetailService.loadUserByUsername(principal.getName());
+        Store store = currentUser.getStore();
+        if (store == null){
+            throw new GeneralCustomException("вы не являетесь администратором");
+        }
+        Store store1 = bonus.getStore();
+        if(store.getStoreId() == store1.getStoreId()) {
+            bonusService.save(bonus);
+        } else {
+            throw new GeneralCustomException("вы не являетесь администратором данного магазина");
+        }
+
 
     }
     @RequestMapping( method = RequestMethod.PUT, value = "/bonuses")

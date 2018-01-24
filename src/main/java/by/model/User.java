@@ -45,6 +45,10 @@ public class User {
     @JoinTable(name = "user_bonus", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "bonus_id"))
     private List<Bonus> bonus;
 
+    @ManyToOne()
+    @JoinTable(name = "store_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
+    private Store store;
+
 
     public User() {
     }
@@ -62,6 +66,7 @@ public class User {
         this.bonuscardnumber = user.getBonuscardnumber();
         this.points = user.getPoints();
         this.bonus = user.getBonus();
+        this.store = user.getStore();
 
     }
 
@@ -161,6 +166,14 @@ public class User {
 
     public void setBonus(List<Bonus> bonus) {
         this.bonus = bonus;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 }
 
