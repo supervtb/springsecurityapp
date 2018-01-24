@@ -9,7 +9,9 @@ class Admin extends Component {
     constructor(props) {
         super(props)
         this.logout = this.logout.bind(this)
-        this.state = {};
+        this.state = {
+            selectedIndex : 0,
+        };
     }
 
     isAuthenticated(){
@@ -57,7 +59,12 @@ class Admin extends Component {
 
 
     }
+
+    select = (index) => {this.setState({selectedIndex: index}); console.log(index);}
+
     render() {
+        var selectedIndex = this.state.selectedIndex;
+
         var currentUser = {
             name: this.state.firstname,
             secondname : this.state.secondname,
@@ -66,15 +73,13 @@ class Admin extends Component {
             bonus : this.state.bonuses,
             listBonuses : this.state.listBonus
         }
-
-
         const isAlready = this.isAuthenticated();
         return (
             <div>
                 {!isAlready ? <Redirect to= {{pathname : '/'}} /> : (
                     <div>
-                        <div> <Header logout = {this.logout} data = {currentUser} /> </div>
-                        <div> <Body data = {currentUser} /> </div>
+                        <div> <Header logout = {this.logout} data = {currentUser} fun = {this.select} /> </div>
+                        <div> <Body data = {currentUser} state={this.state} /> </div>
 
                     </div>
 

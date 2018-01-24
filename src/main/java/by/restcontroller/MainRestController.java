@@ -3,10 +3,13 @@ package by.restcontroller;
 
 import by.customexception.NotEnoughPointsException;
 import by.model.Bonus;
+
 import by.model.User;
 import by.repository.BonusRepository;
+
 import by.service.BonusService;
 import by.service.CustomUserDetailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpStatus;
@@ -31,6 +34,7 @@ import java.util.List;
 public class MainRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
     @GetMapping(value = "/user")
     public User getUser(Principal principal){
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
@@ -86,6 +90,7 @@ public class MainRestController {
         }
         customUserDetailService.removeBonusesToUser(user.getId(), arrayList);
     }
+
 
 
 

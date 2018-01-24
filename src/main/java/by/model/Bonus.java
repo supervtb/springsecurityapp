@@ -1,6 +1,7 @@
 package by.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by albertchubakov on 28.11.2017.
@@ -19,7 +20,17 @@ public class Bonus {
     @Column(name = "price_bonus")
     private int priceBonus;
 
+    @ManyToOne()
+    @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "bonus_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
+    private Store store;
 
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
     public int getBonusId() {
         return bonusId;

@@ -1,8 +1,11 @@
 package by.restcontroller;
 
+import by.customexception.NotEnoughPointsException;
 import by.model.Bonus;
+import by.model.Role;
 import by.model.User;
 import by.service.BonusService;
+import by.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by albertchubakov on 19.12.2017.
@@ -38,6 +42,7 @@ public class BonusRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createBonus(@RequestBody Bonus bonus){
         bonusService.save(bonus);
+
     }
     @RequestMapping( method = RequestMethod.PUT, value = "/bonuses")
     @ResponseStatus(HttpStatus.OK)

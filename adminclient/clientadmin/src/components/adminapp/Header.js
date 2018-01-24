@@ -8,8 +8,10 @@ import Button from 'material-ui/Button';
 
 class Header extends Component {
 
+
     render() {
         var data = this.props.data;
+
 
 
 
@@ -19,7 +21,11 @@ class Header extends Component {
                         <Typography type="title" color="inherit">
                             <span> добрый день,</span>
                             <span> {data.name} </span>
-                            <Button onClick={this.props.logout}>Выйти</Button>
+                            <span> <Button onClick={this.props.fun.bind(this, 0)} >Пользователи</Button></span>
+                            <span> <Button onClick={this.props.fun.bind(this, 1)}  >Бонусы</Button></span>
+                            <span> <Button onClick={this.props.fun.bind(this, 2)} >Компании</Button></span>
+                            <span> <Button  onClick={this.props.logout}>Выйти</Button></span>
+
                         </Typography>
                     </Toolbar>
                 </AppBar>

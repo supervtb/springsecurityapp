@@ -80,7 +80,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     public void addBonusToUser(int userId, int bonusId) throws NotEnoughPointsException {
         User user1 = userRepository.getOne(userId);
-        Bonus bonus1 = bonusRepository.getOne(bonusId); //хардкод для теста
+        Bonus bonus1 = bonusRepository.getOne(bonusId);
         if((user1.getPoints()) >= (bonus1.getPriceBonus())){
             List<Bonus> bonuses = user1.getBonus();
             bonuses.add(bonusRepository.getOne(bonusId));
