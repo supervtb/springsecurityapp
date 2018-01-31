@@ -17,7 +17,7 @@ class Users extends Component {
     }
 
     componentDidMount(){
-        superagent.get('http://localhost:8082/rest/v1/admin/users')
+        superagent.get('http://localhost:8082/rest/v1/users')
             .set('Content-Type','application/x-www-form-urlencoded')
             .set('Authorization','Bearer '+localStorage.getItem('accesstoken'))
             .end((err,res) =>{ if (res){
