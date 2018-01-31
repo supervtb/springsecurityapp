@@ -1,5 +1,7 @@
 package by.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class Bonus {
 
     @ManyToOne()
     @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "bonus_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
+    @JsonBackReference
     private Store store;
 
     public Store getStore() {

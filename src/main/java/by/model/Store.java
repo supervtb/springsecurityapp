@@ -1,5 +1,7 @@
 package by.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,6 +17,11 @@ public class Store {
     private int storeId;
     @Column(name = "store_name")
     private String storeName;
+
+    @OneToMany()
+    @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "store_id"), inverseJoinColumns = @JoinColumn(name = "bonus_id"))
+    @JsonManagedReference
+    private List<Bonus> bonuses;
 
 
     public Store(){}
@@ -35,5 +42,11 @@ public class Store {
         this.storeName = storeName;
     }
 
+    public List<Bonus> getBonuses() {
+        return bonuses;
+    }
 
+    public void setBonuses(List<Bonus> bonuses) {
+        this.bonuses = bonuses;
+    }
 }
