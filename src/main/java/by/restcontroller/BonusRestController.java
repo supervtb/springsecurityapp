@@ -54,9 +54,6 @@ public class BonusRestController {
     public void createBonus(@RequestBody Bonus newBonus , Principal principal) throws GeneralCustomException {
         User currentUser = (User) customUserDetailService.loadUserByUsername(principal.getName());
         Store store = currentUser.getStore();
-        if (store == null){
-            throw new GeneralCustomException("вы не являетесь администратором");
-        }
         Store store1 = newBonus.getStore();
         if(store.getStoreId() == store1.getStoreId()) {
             bonusService.save(newBonus);
@@ -66,13 +63,13 @@ public class BonusRestController {
 
 
     }
-    @Secured({"ROLE_admin", "ROLE_manager"})
+
     @RequestMapping( method = RequestMethod.PUT, value = "/bonuses")
     @ResponseStatus(HttpStatus.OK)
     public void updateBonus(@RequestBody Bonus bonus){
         bonusService.save(bonus);
     }
-    @Secured({"ROLE_admin", "ROLE_manager"})
+
     @RequestMapping( method = RequestMethod.DELETE, value = "/bonuses/{bonusId}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Integer bonusId){

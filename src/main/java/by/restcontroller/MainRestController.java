@@ -88,7 +88,7 @@ public class MainRestController {
         customUserDetailService.addBonusToUser(user.getId(), bonusId.getBonusId());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value ="/user/bonuses/" )
+    @RequestMapping(method = RequestMethod.DELETE, value ="/user/bonuses" )
     @ResponseStatus(HttpStatus.OK)
     public void removeBonusToUser(@RequestBody List<Bonus> bonusId, Principal principal){
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
@@ -99,13 +99,13 @@ public class MainRestController {
         customUserDetailService.removeBonusesToUser(user.getId(), arrayList);
     }
 
-    @Secured("Role_admin")
+    @Secured("ROLE_admin")
     @RequestMapping("/user/{username}")
     public User username(@PathVariable("username") String username){
         User user = (User) customUserDetailService.loadUserByUsername(username);
         return user;
     }
-    @Secured("Role_admin")
+    @Secured("ROLE_admin")
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{username}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("username") String username ,@RequestBody User user){
@@ -125,12 +125,14 @@ public class MainRestController {
         customUserDetailService.update(currentUser);
     }
 
-    @Secured("Role_admin")
+    @Secured("ROLE_admin")
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/{username}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable("username") String username){
         customUserDetailService.delete(username);
     }
+
+
 
 
 
