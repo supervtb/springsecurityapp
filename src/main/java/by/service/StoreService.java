@@ -24,5 +24,27 @@ public class StoreService {
         return store;
     }
 
+    public void save(Store store){
+        storeRepository.save(store);
+    }
+
+    public void update(Store store){
+        Store currentStore = storeRepository.findOne(store.getStoreId());
+        if (store.getStoreName()!=null){
+            currentStore.setStoreName(store.getStoreName());
+        }
+        if (store.getPercent()!=currentStore.getPercent()){
+            currentStore.setPercent(store.getPercent());
+        }
+        if (store.getBonuses()!=null){
+            currentStore.setBonuses(store.getBonuses());
+        }
+        storeRepository.save(currentStore);
+    }
+
+    public void deleteStore(Integer storeId){
+        storeRepository.delete(storeId);
+    }
+
 
 }
