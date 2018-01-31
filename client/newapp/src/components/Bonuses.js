@@ -32,6 +32,7 @@ class Bonuses extends Component {
         for( var key in listBonuses){
             arrAllBonuses.push(listBonuses[key]);
         }
+        console.log(arrAllBonuses);
 
  var templateAllBonuses = arrAllBonuses.map(function(item, index, arr) {
             function addBonusToUser(e) {
@@ -72,6 +73,7 @@ class Bonuses extends Component {
                         <CardText>
                             {item.descriptionBonus}
                             <div> Стоимость:  {item.priceBonus} </div>
+                            <div> Магазин:  {item.store.storeName} </div>
                         </CardText>
                         <CardActions>
                             <RaisedButton key={index} onClick={addBonusToUser} label="добавить"/>

@@ -44,9 +44,9 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/chat")
-    public String chat() {
-        return "chat";
+    @RequestMapping("/cashback")
+    public String cashback() {
+        return "cashback";
     }
 
     @RequestMapping("/adminpanel")

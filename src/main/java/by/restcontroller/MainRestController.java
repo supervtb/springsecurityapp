@@ -35,6 +35,14 @@ public class MainRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
+    @Secured("ROLE_admin")
+    @GetMapping(value = "/users")
+    public List<User> getAllUsers(){
+        List<User> users;
+        users = customUserDetailService.loadAllUser();
+        return users;
+    }
+
     @GetMapping(value = "/user")
     public User getUser(Principal principal){
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
@@ -90,6 +98,40 @@ public class MainRestController {
         }
         customUserDetailService.removeBonusesToUser(user.getId(), arrayList);
     }
+
+    @Secured("Role_admin")
+    @RequestMapping("/user/{username}")
+    public User username(@PathVariable("username") String username){
+        User user = (User) customUserDetailService.loadUserByUsername(username);
+        return user;
+    }
+    @Secured("Role_admin")
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@PathVariable("username") String username ,@RequestBody User user){
+        User currentUser = (User) customUserDetailService.loadUserByUsername(username);
+        if(user.getEmail()!=null)
+            currentUser.setEmail(user.getEmail());
+        if(user.getFirstname()!=null)
+            currentUser.setFirstname(user.getFirstname());
+        if(user.getSecondname()!=null)
+            currentUser.setSecondname(user.getSecondname());
+        if(user.getMiddlename()!=null)
+            currentUser.setMiddlename(user.getMiddlename());
+        if(user.getPhone()!=null)
+            currentUser.setPhone(user.getPhone());
+        if(user.getBonuscardnumber()!=null)
+            currentUser.setBonuscardnumber(user.getBonuscardnumber());
+        customUserDetailService.update(currentUser);
+    }
+
+    @Secured("Role_admin")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@PathVariable("username") String username){
+        customUserDetailService.delete(username);
+    }
+
 
 
 

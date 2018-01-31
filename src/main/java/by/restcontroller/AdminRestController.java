@@ -22,37 +22,6 @@ public class AdminRestController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
-    @GetMapping(value = "/users")
-    public List<User> getAllUsers(){
-        List<User> users;
-        users = customUserDetailService.loadAllUser();
-        return users;
-    }
-
-    @RequestMapping("/users/{username}")
-    public User username(@PathVariable("username") String username){
-        User user = (User) customUserDetailService.loadUserByUsername(username);
-       return user;
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/{username}")
-    @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("username") String username ,@RequestBody User user){
-        User currentUser = (User) customUserDetailService.loadUserByUsername(username);
-        if(user.getEmail()!=null)
-            currentUser.setEmail(user.getEmail());
-        if(user.getFirstname()!=null)
-            currentUser.setFirstname(user.getFirstname());
-        if(user.getSecondname()!=null)
-            currentUser.setSecondname(user.getSecondname());
-        if(user.getMiddlename()!=null)
-            currentUser.setMiddlename(user.getMiddlename());
-        if(user.getPhone()!=null)
-            currentUser.setPhone(user.getPhone());
-        if(user.getBonuscardnumber()!=null)
-            currentUser.setBonuscardnumber(user.getBonuscardnumber());
-        customUserDetailService.update(currentUser);
-    }
 
 
 }

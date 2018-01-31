@@ -53,7 +53,7 @@ class Header extends Component {
             icon={nearbyIcon}
             onClick={() => this.select(2)}
           />
-            {selectedIndex}
+
         </BottomNavigation>
       </Paper>
 
