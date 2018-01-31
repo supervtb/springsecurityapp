@@ -18,8 +18,7 @@ public class Store {
     @Column(name = "store_name")
     private String storeName;
 
-    @OneToMany()
-    @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "store_id"), inverseJoinColumns = @JoinColumn(name = "bonus_id"))
+    @OneToMany(mappedBy = "store")
     @JsonManagedReference
     private List<Bonus> bonuses;
 
