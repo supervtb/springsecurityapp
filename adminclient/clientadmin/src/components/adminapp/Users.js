@@ -4,6 +4,7 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import superagent from 'superagent'
 import Checkbox from 'material-ui/Checkbox';
+import Button from 'material-ui/Button';
 
 
 
@@ -43,7 +44,6 @@ class Users extends Component {
         }
 
         var templateAllUsers =  arrAllUsers.map(function (item, index) {
-            console.log(item)
             return (
                 <TableRow key = {item.id}>
                     <TableCell padding="checkbox"><Checkbox/></TableCell>
@@ -53,6 +53,7 @@ class Users extends Component {
                     <TableCell >{item.firstname}</TableCell>
                     <TableCell >{item.bonuscardnumber}</TableCell>
                     <TableCell >{item.points}</TableCell>
+                    <TableCell> <Button >Просмотреть</Button><Button >Изменить</Button><Button>Удалить</Button>  </TableCell>
                 </TableRow>
             )
 
@@ -70,6 +71,7 @@ class Users extends Component {
                             <TableCell >имя</TableCell>
                             <TableCell >номер карты</TableCell>
                             <TableCell >баллы</TableCell>
+                            <TableCell ></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

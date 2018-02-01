@@ -12,6 +12,7 @@ class Body extends Component {
     render() {
         var data = this.props.data
         var state = this.props.state;
+        var viewdata = this.props.viewdata;
 
         if (state.selectedIndex == 0){
             var bodycontent = <Users/>
@@ -20,7 +21,7 @@ class Body extends Component {
             var bodycontent = <Bonuses/>
         }
         if (state.selectedIndex == 2){
-            var bodycontent = <Companies/>
+            var bodycontent = <Companies viewdata={this.viewdata}/>
         }
         return ( <div>
                 {bodycontent}

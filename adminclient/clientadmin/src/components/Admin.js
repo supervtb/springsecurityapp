@@ -62,6 +62,7 @@ class Admin extends Component {
 
     select = (index) => {this.setState({selectedIndex: index}); console.log(index);}
 
+
     render() {
         var selectedIndex = this.state.selectedIndex;
 
