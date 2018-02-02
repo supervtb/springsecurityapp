@@ -77,6 +77,7 @@ class Companies extends Component {
 
 
         var templateAllBonuses =  arrAllStores.map(function (item, index) {
+            console.log(item);
             function openView(e, selectedindex) {
                 viewdata(item);
                 selectedIndex(selectedindex);

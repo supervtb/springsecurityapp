@@ -51,7 +51,7 @@ class Bonuses extends Component {
                     <TableCell >{item.nameBonus}</TableCell>
                     <TableCell >{item.descriptionBonus}</TableCell>
                     <TableCell >{item.priceBonus}</TableCell>
-                    
+                    <TableCell >{item.store.storeName}</TableCell>
                 </TableRow>
             )
 

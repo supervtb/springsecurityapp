@@ -10,7 +10,6 @@ import java.util.List;
  */
 @Entity
 @Table(name = "bonus")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_idn")
 public class Bonus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +21,9 @@ public class Bonus {
     private String descriptionBonus;
     @Column(name = "price_bonus")
     private int priceBonus;
-
-    @ManyToOne()
+     @ManyToOne()
     @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "bonus_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
-    @JsonIgnore
+    @JsonIgnoreProperties(value = "bonuses", allowSetters = true)
     private Store store;
 
     public Store getStore() {

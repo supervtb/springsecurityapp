@@ -1,5 +1,6 @@
 package by.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -47,6 +48,7 @@ public class User {
 
     @ManyToOne()
     @JoinTable(name = "store_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
+    @JsonIgnoreProperties(value = "bonuses", allowSetters = true)
     private Store store;
 
 
