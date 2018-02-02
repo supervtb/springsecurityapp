@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "store")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_id")
 public class Store  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,8 +24,11 @@ public class Store  {
     @Column(name = "percent")
     private int percent;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Bonus> bonuses;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<User> users ;
 
 
     public Store(){}
@@ -60,5 +63,13 @@ public class Store  {
 
     public void setPercent(int percent) {
         this.percent = percent;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

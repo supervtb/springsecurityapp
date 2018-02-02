@@ -2,6 +2,7 @@ package by.service;
 
 import by.model.Store;
 import by.repository.StoreRepository;
+import by.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class StoreService {
     @Autowired
     StoreRepository storeRepository;
+    @Autowired
+    UserRepository userRepository;
 
     public List<Store> getAllStore(){
         return storeRepository.findAll();

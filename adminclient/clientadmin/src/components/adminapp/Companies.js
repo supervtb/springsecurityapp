@@ -11,6 +11,9 @@ import Dialog, {
     DialogContentText,
     DialogTitle,
 } from 'material-ui/Dialog';
+import DialogView from "./DialogView";
+import DialogForm from "./DialogForm";
+import DialogConfirm from "./DialogConfirm";
 
 
 
@@ -19,6 +22,7 @@ class Companies extends Component {
         super();
         this.state = {
             open: false,
+            selectedIndex : 0,
             items : ''
         }
     }
@@ -49,6 +53,10 @@ class Companies extends Component {
         this.setState({ open: false });
     };
 
+    selectedIndex=(index) =>{
+      this.setState({selectedIndex:index}) ;
+    };
+
 
 
 
@@ -58,6 +66,7 @@ class Companies extends Component {
     render() {
         var company = this.state.items
         var viewdata = this.handleClickOpen;
+        var selectedIndex = this.selectedIndex;
         var data = this.props.data;
         var arrayStore  = this.state.listStore;
         var arrAllStores = [];
@@ -68,8 +77,9 @@ class Companies extends Component {
 
 
         var templateAllBonuses =  arrAllStores.map(function (item, index) {
-            function openView(e) {
+            function openView(e, selectedindex) {
                 viewdata(item);
+                selectedIndex(selectedindex);
             }
 
             return (
@@ -78,11 +88,32 @@ class Companies extends Component {
                     <TableCell >{item.storeId}</TableCell>
                     <TableCell >{item.storeName}</TableCell>
                     <TableCell >{item.percent} </TableCell>
-                    <TableCell > <Button onClick={openView.bind(this, item)} >Просмотреть</Button><Button >Изменить</Button> <Button>Удалить</Button></TableCell>
+                    <TableCell > <Button onClick={openView.bind(this, item, 1)} >Просмотреть</Button><Button onClick={openView.bind(this, item, 2)}>Изменить</Button> <Button onClick={openView.bind(this, item, 3)}>Удалить</Button></TableCell>
                 </TableRow>
             )
 
         })
+        let renderdialog = 0;
+        if (this.state.selectedIndex == 1){
+            renderdialog =  <DialogView data={this.state} fun={this.handleClose}/>;
+        }
+        if (this.state.selectedIndex == 2){
+            console.log(this.state.selectedIndex)
+            renderdialog =  <DialogForm data={this.state}
+                                        fun={this.handleClose}
+                                        store = {company.storeId}
+                                        storeName={company.storeName}
+                                        percent = {company.percent} />;
+        }
+
+        if(this.state.selectedIndex == 3) {
+            console.log(this.state.selectedIndex)
+            renderdialog = <DialogConfirm data = {this.state}
+                                          fun = {this.handleClose}
+                                          store = {company.storeId}
+                                          storeName={company.storeName}
+            />
+        }
 
 
 
@@ -107,23 +138,7 @@ class Companies extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Компания"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                             ID компании: {company.storeId}
-                        </DialogContentText>
-                        <DialogContentText id="alert-dialog-description">
-                            Название компании: {company.storeName}
-                        </DialogContentText>
-                        <DialogContentText id="alert-dialog-description">
-                            Процент компании: {company.percent}
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Закрыть
-                        </Button>
-                    </DialogActions>
+                    {renderdialog}
                 </Dialog>
             </Paper>
         );

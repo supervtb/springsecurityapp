@@ -1,9 +1,6 @@
 package by.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "bonus")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="_idn")
 public class Bonus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +25,7 @@ public class Bonus {
 
     @ManyToOne()
     @JoinTable(name = "store_bonus", joinColumns = @JoinColumn(name = "bonus_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
+    @JsonIgnore
     private Store store;
 
     public Store getStore() {

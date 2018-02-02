@@ -14,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.soap.SOAPBinding;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,19 +54,10 @@ public class StoreRestController {
     public void updateStore(@RequestBody Store store){
         storeService.update(store);
     }
-    @Secured({"ROLE_admin", "ROLE_manager"})
     @RequestMapping(method = RequestMethod.DELETE, value = "/store/{storeId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteStore(@PathVariable Integer storeId, Principal principal) throws GeneralCustomException {
-        User currentUser = (User) customUserDetailService.loadUserByUsername(principal.getName());
-        Store store = currentUser.getStore();
-        if(store.getStoreId() == storeId) {
-            storeService.deleteStore(storeId);
-        } else {
-                throw new GeneralCustomException("вы не являетесь администратором данного магазина");
-        }
-
-
+           storeService.deleteStore(storeId);
 
     }
 
