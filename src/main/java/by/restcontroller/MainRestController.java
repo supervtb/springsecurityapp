@@ -122,6 +122,8 @@ public class MainRestController {
             currentUser.setPhone(user.getPhone());
         if(user.getBonuscardnumber()!=null)
             currentUser.setBonuscardnumber(user.getBonuscardnumber());
+        if(user.getPoints() != currentUser.getPoints())
+            currentUser.setPoints(user.getPoints());
         customUserDetailService.update(currentUser);
     }
 

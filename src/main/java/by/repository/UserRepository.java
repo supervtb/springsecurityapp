@@ -34,14 +34,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
    @Modifying
    @Transactional
-   @Query(value = "update User u set   u.email = ?2, u.firstname = ?3, u.secondname = ?4, u.middlename= ?5, u.phone = ?6, u.bonuscardnumber = ?7 where u.name = ?1 ")
+   @Query(value = "update User u set   u.email = ?2, u.firstname = ?3, u.secondname = ?4, u.middlename= ?5, u.phone = ?6, u.bonuscardnumber = ?7, u.points = ?8 where u.name = ?1")
    void update(String name,
                String email,
                String firstname,
                String secondname,
                String middlename,
                String phone,
-               String bonuscardnumber);
+               String bonuscardnumber,
+               int points
+               );
 
 
 }

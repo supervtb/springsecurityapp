@@ -73,19 +73,14 @@ class Companies extends Component {
         for( var key in arrayStore){
             arrAllStores.push(arrayStore[key]);
         }
-
-
-
         var templateAllBonuses =  arrAllStores.map(function (item, index) {
             console.log(item);
             function openView(e, selectedindex) {
                 viewdata(item);
                 selectedIndex(selectedindex);
             }
-
             return (
                 <TableRow  key = {item.storeId}>
-                    <TableCell padding="checkbox"><Checkbox/></TableCell>
                     <TableCell >{item.storeId}</TableCell>
                     <TableCell >{item.storeName}</TableCell>
                     <TableCell >{item.percent} </TableCell>
@@ -115,14 +110,10 @@ class Companies extends Component {
                                           storeName={company.storeName}
             />
         }
-
-
-
         return ( <Paper >
                 <Table >
                     <TableHead>
                         <TableRow>
-                            <TableCell padding="checkbox" ></TableCell>
                             <TableCell >ID</TableCell>
                             <TableCell >название</TableCell>
                             <TableCell >процент кэшбэка</TableCell>

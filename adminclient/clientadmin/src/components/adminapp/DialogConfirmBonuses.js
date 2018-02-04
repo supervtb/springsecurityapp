@@ -7,31 +7,29 @@ import Dialog, {
     DialogContentText,
     DialogTitle,
 } from 'material-ui/Dialog';
-import Input, { InputLabel } from 'material-ui/Input';
-import TextField from 'material-ui/TextField';
 import superagent from 'superagent';
 
 
 
 
 
-class DialogConfirm extends Component {
+class DialogConfirmBonuses extends Component {
     constructor(){
         super();
         this.state = {
-            storeId : "",
-            storeName : ""
+            bonusId : "",
+            nameBonus : ""
         }
 
     }
     componentWillMount(){
-        this.setState({"storeName":this.props.storeName,"percent":this.props.percent})
+        this.setState({"bonusId":this.props.bonusId,"nameDonus":this.props.nameBonus})
     }
 
     submitForm(event) {
         event.preventDefault();
         superagent
-            .delete('http://localhost:8082/rest/v1/store/'.concat(this.props.store))
+            .delete('http://localhost:8082/rest/v1/bonuses/'.concat(this.props.bonusId))
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + localStorage.getItem('accesstoken'))
             .end((err, res) => {
@@ -47,15 +45,15 @@ class DialogConfirm extends Component {
     render() {
 
         var data = this.props.data;
-        var company = data.items;
+        var bonuses = data.items;
 
         return(
             <div>
                 <form onSubmit={this.submitForm.bind(this)}>
-                    <DialogTitle id="alert-dialog-title">{"Удалить компанию"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"Удалить бонус"}</DialogTitle>
                     <DialogContent>
-                        Вы действительно хотите удалить {company.storeName}?
-                       </DialogContent>
+                        Вы действительно хотите удалить {bonuses.bonusName}?
+                    </DialogContent>
                     <DialogActions>
                         <Button type="submit" >
                             Удалить
@@ -71,4 +69,4 @@ class DialogConfirm extends Component {
 }
 
 
-export default DialogConfirm;
+export default DialogConfirmBonuses;

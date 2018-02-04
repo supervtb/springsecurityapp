@@ -15,23 +15,22 @@ import superagent from 'superagent';
 
 
 
-class DialogConfirm extends Component {
+class DialogConfirmUser extends Component {
     constructor(){
         super();
         this.state = {
-            storeId : "",
-            storeName : ""
+            name:""
         }
 
     }
     componentWillMount(){
-        this.setState({"storeName":this.props.storeName,"percent":this.props.percent})
+        this.setState({"name":this.props.name})
     }
 
     submitForm(event) {
         event.preventDefault();
         superagent
-            .delete('http://localhost:8082/rest/v1/store/'.concat(this.props.store))
+            .delete('http://localhost:8082/rest/v1/users/'.concat(this.props.name))
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + localStorage.getItem('accesstoken'))
             .end((err, res) => {
@@ -47,15 +46,15 @@ class DialogConfirm extends Component {
     render() {
 
         var data = this.props.data;
-        var company = data.items;
+        var user = data.items;
 
         return(
             <div>
                 <form onSubmit={this.submitForm.bind(this)}>
                     <DialogTitle id="alert-dialog-title">{"Удалить компанию"}</DialogTitle>
                     <DialogContent>
-                        Вы действительно хотите удалить {company.storeName}?
-                       </DialogContent>
+                        Вы действительно хотите удалить {user.name}?
+                    </DialogContent>
                     <DialogActions>
                         <Button type="submit" >
                             Удалить
@@ -71,4 +70,4 @@ class DialogConfirm extends Component {
 }
 
 
-export default DialogConfirm;
+export default DialogConfirmUser;

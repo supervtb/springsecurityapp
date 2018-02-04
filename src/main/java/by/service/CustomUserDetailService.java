@@ -74,7 +74,8 @@ public class CustomUserDetailService implements UserDetailsService {
                 updatedUser.getSecondname(),
                 updatedUser.getMiddlename(),
                 updatedUser.getPhone(),
-                updatedUser.getBonuscardnumber()
+                updatedUser.getBonuscardnumber(),
+                updatedUser.getPoints()
                 );
     }
 
