@@ -14,10 +14,13 @@ class DialogViewUsers extends Component {
 
 
     render() {
+
         var data = this.props.data;
         var users = data.items;
-        var roles = [];
-        console.log(users)
+        var managedstore = "нет";
+        if( users.store != null) {
+            managedstore = users.store.storeName;
+        }
         const rolename = users.role.map((role) =>
             <DialogContentText key = {role.roleId}>{role.roleName}</DialogContentText>
         );
@@ -26,6 +29,7 @@ class DialogViewUsers extends Component {
             <DialogContentText key = {bonus.bonusId}>{bonus.nameBonus}</DialogContentText>
 
         );
+
         return(
             <div>
                 <DialogTitle id="alert-dialog-title">{"Пользователь"}</DialogTitle>
@@ -56,6 +60,9 @@ class DialogViewUsers extends Component {
                     </DialogContentText>
                     <DialogContentText id="alert-dialog-description">
                         Роль: {rolename}
+                    </DialogContentText>
+                    <DialogContentText id="alert-dialog-description">
+                        Менеджер магазина: {managedstore}
                     </DialogContentText>
                     <DialogContentText  id="alert-dialog-description">
                         Подключенные бонусы: {addedbonus}

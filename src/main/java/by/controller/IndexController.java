@@ -70,7 +70,7 @@ public class IndexController {
         emailSenderTo=userForm.getEmail();
         EmailSenderService senderService  = new EmailSenderService(emailSenderLogin,emailSenderPassword);
         senderService.send(emailSenderSubject,emailSenderText, emailSenderLogin, emailSenderTo);
-       */ return"redirect:/chat";
+       */ return"redirect:/cashback";
     }
 
     @ExceptionHandler(JDBCException.class)
