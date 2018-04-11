@@ -37,8 +37,7 @@ public class BonusService  {
     public void save(Bonus bonus){
         bonusRepository.save(bonus);
     }
-
-
+    
 
     public void delete(Integer bonusId){
         bonusRepository.delete(bonusId);
